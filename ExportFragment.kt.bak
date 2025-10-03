@@ -1,0 +1,157 @@
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.net.Uri
+import android.os.Bundle
+import android.view.*
+import androidx.fragment.app.Fragment
+import com.reelmakerai.databinding.FragmentExportBinding
+import com.reelmakerai.export.ExportCallback
+import com.reelmakerai.export.ExportTask
+import com.reelmakerai.export.ExportUtils
+import com.reelmakerai.export.engine.VideoExportEngine
+import com.reelmakerai.overlay.OverlayItem
+import jp.co.cyberagent.android.gpuimage.GPUImageView
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageLookupFilter
+import java.io.File
+import java.net.URL
+
+
+class ExportFragment : Fragment() {
+
+    private var _binding: FragmentExportBinding? = null
+    private val binding get() = _binding!!
+
+    private var selectedMood: String? = null
+
+    companion object {
+        private const val ARG_MOOD = "arg_mood"
+
+        fun newInstance(mood: String): ExportFragment {
+            val fragment = ExportFragment()
+            val args = Bundle()
+            args.putString(ARG_MOOD, mood)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        selectedMood = arguments?.getString(ARG_MOOD)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentExportBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.exportStatusView?.showProgress()
+
+        val gpuImageView = binding.gpuPreview
+
+        val moodToLutUrl = mapOf(
+            "Happy" to "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/luts/lut_happy.png",
+            "Melancholy" to "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/luts/lut_melancholy.png",
+            "Epic" to "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/luts/lut_epic.png",
+            "Romantic" to "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/luts/lut_romantic.png",
+            "Dark" to "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/luts/lut_dark.png"
+        )
+
+        val lutUrl = moodToLutUrl[selectedMood]
+        if (lutUrl != null) {
+            applyLutToPreview(gpuImageView, lutUrl)
+            startExportFlow(lutUrl)
+        } else {
+            binding.exportStatusView?.showError("No LUT found for mood: $selectedMood")
+        }
+    }
+
+    private fun applyLutToPreview(gpuImageView: GPUImageView, lutUrl: String) {
+        val fallbackBitmap = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888).apply {
+            eraseColor(Color.DKGRAY)
+        }
+        gpuImageView.setImage(fallbackBitmap)
+
+        Thread {
+            try {
+                val input = URL(lutUrl).openStream()
+                val lutBitmap = BitmapFactory.decodeStream(input)
+
+                val filter = GPUImageLookupFilter()
+                filter.bitmap = lutBitmap
+
+                activity?.runOnUiThread {
+                    gpuImageView.filter = filter
+                }
+            } catch (e: Exception) {
+                activity?.runOnUiThread {
+                    binding.exportStatusView?.showError("Failed to load LUT: ${e.message}")
+                }
+            }
+        }.start()
+    }
+
+    private fun startExportFlow(lutUrl: String) {
+        Thread {
+            try {
+                val inputPath = "/sdcard/input.mp4" // Replace with actual input path
+                val outputPath = ExportUtils.getTempExportPath(requireContext())
+                val lutBitmap = BitmapFactory.decodeStream(URL(lutUrl).openStream())
+
+                val task = ExportTask(
+                    inputPath = inputPath,
+                    outputPath = outputPath,
+                    lutBitmap = lutBitmap,
+                    mood = selectedMood ?: "Unknown",
+                    overlays = listOf<OverlayItem>(), // Add overlays if needed
+                    watermarkBitmap = null,           // Add watermark if needed
+                    exportHD = true,
+                    voiceFXEnabled = false
+                )
+
+                VideoExportEngine.export(requireContext(), task, object : ExportCallback {
+                    override fun onProgress(percent: Int) {
+                        activity?.runOnUiThread {
+                            binding.exportStatusView?.updateProgress(percent)
+                        }
+                    }
+
+                    override fun onComplete(outputFile: File) {
+                        activity?.runOnUiThread {
+                            binding.exportStatusView?.showCompleted()
+
+                            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                                type = "video/mp4"
+                                putExtra(Intent.EXTRA_STREAM, Uri.fromFile(outputFile))
+                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            }
+
+                            val chooser = Intent.createChooser(shareIntent, "Share your cinematic reel")
+                            startActivity(chooser)
+                        }
+                    }
+
+                    override fun onError(message: String) {
+                        activity?.runOnUiThread {
+                            binding.exportStatusView?.showError(message)
+                        }
+                    }
+                })
+
+            } catch (e: Exception) {
+                activity?.runOnUiThread {
+                    binding.exportStatusView?.showError("Export failed: ${e.message}")
+                }
+            }
+        }.start()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

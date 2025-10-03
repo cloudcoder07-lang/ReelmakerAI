@@ -1,0 +1,93 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="12dp">
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true" />
+    </FrameLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginBottom="12dp">
+
+        <LinearLayout
+            android:id="@+id/toolBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            android:text="WARM"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:text="COOL"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:text="VINTAGE"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:text="CINEMATIC"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/voiceFxStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VOICE FX: OFF"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:background="#333333"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/btnSwapBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Swap Background"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#4CAF50"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/btnExport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Export Reel"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#4CAF50" />
+</LinearLayout>

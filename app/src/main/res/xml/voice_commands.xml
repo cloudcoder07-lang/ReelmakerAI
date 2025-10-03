@@ -1,0 +1,7 @@
+<commands>
+    <command name="apply mood filter" />
+    <command name="add voice effect" />
+    <command name="swap background" />
+    <command name="export reel" />
+    <command name="preview reel" />
+</commands>

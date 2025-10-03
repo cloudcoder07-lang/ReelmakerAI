@@ -1,0 +1,6 @@
+{
+  "luts": ["cinematic.cube", "noir.cube"],
+  "fonts": ["montserrat.ttf", "bebas.ttf"],
+  "stickers": ["heart.png", "fire.png"],
+  "thumbnails": ["default.jpg"]
+}

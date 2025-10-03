@@ -1,0 +1,162 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- App Title -->
+        <TextView
+            android:text="ReelMakerAI"
+            android:textSize="24sp"
+            android:textColor="#4E342E"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp" />
+
+        <!-- CREATE NEW Section -->
+        <TextView
+            android:text="CREATE NEW"
+            android:textSize="16sp"
+            android:textColor="#4E342E"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="2dp"
+            android:background="#009688"
+            android:layout_marginBottom="12dp" />
+
+        <!-- White Rounded Rectangle with Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp"
+            android:elevation="4dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:layout_marginHorizontal="8dp"
+            android:backgroundTint="@android:color/white"
+            android:backgroundTintMode="src_in"
+            android:shape="rectangle"
+            android:radius="16dp">
+
+            <!-- Video Button -->
+            <LinearLayout
+                android:id="@+id/btnVideo"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_video"
+                    android:backgroundTint="#E91E63"
+                    android:tint="#FFFFFF"
+                    android:background="@android:color/transparent" />
+
+                <TextView
+                    android:text="Video"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <!-- Photo Button -->
+            <LinearLayout
+                android:id="@+id/btnPhoto"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_photo"
+                    android:backgroundTint="#FF9800"
+                    android:tint="#FFFFFF"
+                    android:background="@android:color/transparent" />
+
+                <TextView
+                    android:text="Photo"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <!-- Collage Button -->
+            <LinearLayout
+                android:id="@+id/btnCollage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_collage"
+                    android:backgroundTint="#FF9800"
+                    android:tint="#FFFFFF"
+                    android:background="@android:color/transparent" />
+
+                <TextView
+                    android:text="Collage"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- WHAT'S NEW Section -->
+        <TextView
+            android:text="WHAT'S NEW"
+            android:textSize="16sp"
+            android:textColor="#4E342E"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/asset_bloom"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/asset_portrait"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/asset_new" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

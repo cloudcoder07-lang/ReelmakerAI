@@ -1,0 +1,13 @@
+<resources>
+    <!-- Primary and Secondary Button Colors -->
+    <color name="btnPrimary">#4CAF50</color>       <!-- Green -->
+    <color name="btnSecondary">#333333</color>     <!-- Dark Gray -->
+
+    <!-- Background Gradient Fallback -->
+    <color name="bgGradient">#121212</color>       <!-- Light Black -->
+
+    <!-- Optional Common Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="accentPurple">#6A1B9A</color>
+</resources>

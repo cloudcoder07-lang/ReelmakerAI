@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "55539780007",
+    "project_id": "reelmakerai-b48df",
+    "storage_bucket": "reelmakerai-b48df.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55539780007:android:6059dff6263339c0c78e82",
+        "android_client_info": {
+          "package_name": "com.reelmakerai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnfGc0L7iWYa9_T7uSmAzzMRsM1hfcw9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

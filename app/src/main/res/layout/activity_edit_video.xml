@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgGradient">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp" />
+
+    <HorizontalScrollView
+        android:id="@+id/lutScroll"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/videoView"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <LinearLayout
+            android:id="@+id/lutContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/btnVoiceFX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apply Voice FX"
+        android:layout_below="@id/lutScroll"
+        android:layout_margin="16dp" />
+
+    <Button
+        android:id="@+id/btnBackgroundSwap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Swap Background"
+        android:layout_below="@id/btnVoiceFX"
+        android:layout_margin="16dp" />
+
+    <Button
+        android:id="@+id/btnExport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Export Reel"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp" />
+</RelativeLayout>
