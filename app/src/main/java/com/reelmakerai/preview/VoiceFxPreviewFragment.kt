@@ -81,4 +81,12 @@ class VoiceFxPreviewFragment : Fragment() {
             null
         }
     }
+    private var currentEffect = EffectType.ROBOT
+
+    fun switchEffect(type: EffectType) {
+        currentEffect = type
+    }
+
+    val fx = VoiceFxProcessor.applyEffect(buffer.copyOf(read), currentEffect)
+
 }
