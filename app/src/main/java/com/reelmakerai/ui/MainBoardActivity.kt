@@ -104,4 +104,7 @@ class MainBoardActivity : AppCompatActivity() {
     val ready = com.reelmakerai.release.ReleaseChecklist.validate()
     com.reelmakerai.release.LaunchReady.isReady = ready
 
+    val changelog = com.reelmakerai.release.ChangelogGenerator.generate()
+    findViewById<TextView>(R.id.changelogText)?.text = changelog
+
 }
