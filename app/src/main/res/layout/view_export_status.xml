@@ -3,20 +3,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:padding="12dp">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="100" />
-
     <TextView
-        android:id="@+id/statusMessage"
-        android:layout_width="match_parent"
+        android:id="@+id/exportStatusText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Export status"
+        android:text="Exporting..."
         android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
+
+    <ProgressBar
+        android:id="@+id/exportProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
 </LinearLayout>

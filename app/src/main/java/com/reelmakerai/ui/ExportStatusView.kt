@@ -2,40 +2,31 @@ package com.reelmakerai.ui
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.widget.FrameLayout
-import com.reelmakerai.databinding.ViewExportStatusBinding
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
+import com.reelmakerai.R
 
 class ExportStatusView @JvmOverloads constructor(
     context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+    attrs: AttributeSet? = null
+) : LinearLayout(context, attrs) {
 
-    private val binding: ViewExportStatusBinding =
-        ViewExportStatusBinding.inflate(LayoutInflater.from(context), this, true)
+    private val progressBar: ProgressBar
+    private val statusText: TextView
 
     init {
-        binding.progressBar.progress = 0
-        binding.statusMessage.text = "Ready to export"
+        inflate(context, R.layout.view_export_status, this)
+        progressBar = findViewById(R.id.exportProgress)
+        statusText = findViewById(R.id.exportStatusText)
     }
 
-    fun showProgress() {
-        binding.progressBar.visibility = VISIBLE
-        binding.statusMessage.text = "Exporting..."
+    fun showStatus(message: String) {
+        statusText.text = message
+        progressBar.visibility = VISIBLE
     }
 
-    fun updateProgress(percent: Int) {
-        binding.progressBar.progress = percent
-        binding.statusMessage.text = "Exporting... $percent%"
-    }
-
-    fun showCompleted() {
-        binding.progressBar.progress = 100
-        binding.statusMessage.text = "Export complete!"
-    }
-
-    fun showError(message: String) {
-        binding.statusMessage.text = "Export failed: $message"
+    fun hideStatus() {
+        progressBar.visibility = GONE
     }
 }

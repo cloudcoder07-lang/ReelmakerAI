@@ -25,8 +25,9 @@
         <activity android:name=".ui.PhotoEditorActivity" android:exported="true" />
         <activity android:name=".ui.CollageEditorActivity" android:exported="true" />
         <activity android:name=".ui.MainBoardActivity" android:exported="true"/>
-        <activity android:name=".ui.ExportActivity" android:exported="true" >
-            <intent-filter>
+        <activity android:name=".ui.ExportActivity" android:exported="true" />
+        <activity android:name=".ui.ExportResultActivity" android:exported="true" >
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
