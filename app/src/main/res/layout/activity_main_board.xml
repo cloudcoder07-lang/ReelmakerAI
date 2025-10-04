@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient">
@@ -41,16 +42,12 @@
             android:background="@android:color/white"
             android:orientation="horizontal"
             android:padding="16dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="12dp"
             android:elevation="4dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:clipToPadding="false"
-            android:layout_marginHorizontal="8dp"
-            android:backgroundTint="@android:color/white"
-            android:backgroundTintMode="src_in"
-            android:shape="rectangle"
-            android:radius="16dp">
+            android:layout_marginHorizontal="8dp">
 
             <!-- Video Button -->
             <LinearLayout
@@ -66,7 +63,7 @@
                     android:layout_height="64dp"
                     android:src="@drawable/ic_video"
                     android:backgroundTint="#E91E63"
-                    android:tint="#FFFFFF"
+                    app:tint="#FFFFFF"
                     android:background="@android:color/transparent" />
 
                 <TextView
@@ -90,7 +87,7 @@
                     android:layout_height="64dp"
                     android:src="@drawable/ic_photo"
                     android:backgroundTint="#FF9800"
-                    android:tint="#FFFFFF"
+                    app:tint="#FFFFFF"
                     android:background="@android:color/transparent" />
 
                 <TextView
@@ -114,7 +111,7 @@
                     android:layout_height="64dp"
                     android:src="@drawable/ic_collage"
                     android:backgroundTint="#FF9800"
-                    android:tint="#FFFFFF"
+                    app:tint="#FFFFFF"
                     android:background="@android:color/transparent" />
 
                 <TextView
@@ -124,6 +121,17 @@
                     android:layout_marginTop="4dp" />
             </LinearLayout>
         </LinearLayout>
+
+        <!-- Dynamic What's New Label -->
+        <TextView
+            android:id="@+id/whatsNewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/whats_new"
+            android:textSize="14sp"
+            android:textColor="#4E342E"
+            android:layout_marginBottom="12dp"
+            android:layout_gravity="center" />
 
         <!-- WHAT'S NEW Section -->
         <TextView

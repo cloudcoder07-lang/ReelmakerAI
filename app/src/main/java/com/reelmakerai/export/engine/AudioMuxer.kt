@@ -1,9 +1,7 @@
 package com.reelmakerai.export.engine
 
 import android.media.*
-import java.io.File
 import java.nio.ByteBuffer
-
 
 object AudioMuxer {
 
@@ -41,7 +39,15 @@ object AudioMuxer {
                 info.offset = 0
                 info.size = sampleSize
                 info.presentationTimeUs = extractor.sampleTime
-                info.flags = extractor.sampleFlags
+
+                // ✅ Patch: Translate sampleFlags to codec-compatible flags
+                val sampleFlags = extractor.sampleFlags
+                info.flags = when {
+                    sampleFlags and MediaExtractor.SAMPLE_FLAG_SYNC != 0 -> MediaCodec.BUFFER_FLAG_SYNC_FRAME
+                    sampleFlags and MediaExtractor.SAMPLE_FLAG_PARTIAL_FRAME != 0 -> MediaCodec.BUFFER_FLAG_PARTIAL_FRAME
+                    else -> 0
+                }
+
                 muxer.writeSampleData(muxIndex, ByteBuffer.wrap(buffer, 0, sampleSize), info)
                 extractor.advance()
             }

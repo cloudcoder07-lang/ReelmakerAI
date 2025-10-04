@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ReelMakerAI</string>
+    <string name="create_new">CREATE NEW</string>
+    <string name="video">Video</string>
+    <string name="photo">Photo</string>
+    <string name="collage">Collage</string>
+    <string name="whats_new">WHAT%92S NEW:</string>
 </resources>

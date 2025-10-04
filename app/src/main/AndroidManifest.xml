@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.reelmakerai">
 
+    <!-- Only keep permissions needed for video/audio flows -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReelMakerAI">
 
+        <activity android:name=".ui.IntroActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".ui.VideoPreviewActivity" android:exported="true" />
-        <activity android:name=".MainActivity" android:exported="true">
+        <activity android:name=".ui.PhotoEditorActivity" android:exported="true" />
+        <activity android:name=".ui.CollageEditorActivity" android:exported="true" />
+        <activity android:name=".ui.MainBoardActivity" android:exported="true"/>
+        <activity android:name=".ui.ExportActivity" android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

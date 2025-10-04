@@ -1,12 +1,8 @@
 package com.reelmakerai.preview
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.media.*
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.reelmakerai.audio.VoiceFxProcessor
 import kotlinx.coroutines.*
@@ -27,22 +23,17 @@ class VoiceFxPreviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            audioRecord = createAudioRecordSafely()
-            audioTrack = AudioTrack(
-                AudioManager.STREAM_MUSIC,
-                sampleRate,
-                AudioFormat.CHANNEL_OUT_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                bufferSize,
-                AudioTrack.MODE_STREAM
-            )
-            startPreview()
-        } else {
-            Toast.makeText(requireContext(), "Microphone permission required", Toast.LENGTH_SHORT).show()
-        }
+        audioRecord = createAudioRecordSafely()
+        audioTrack = AudioTrack(
+            AudioManager.STREAM_MUSIC,
+            sampleRate,
+            AudioFormat.CHANNEL_OUT_MONO,
+            AudioFormat.ENCODING_PCM_16BIT,
+            bufferSize,
+            AudioTrack.MODE_STREAM
+        )
+
+        startPreview()
     }
 
     private fun startPreview() {
