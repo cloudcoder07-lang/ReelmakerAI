@@ -46,5 +46,23 @@ class MainBoardActivity : AppCompatActivity() {
         }
         idleRefresh.start()
     }
+    private lateinit var engagementMonitor: EngagementMonitor
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main_board)
+
+        com.reelmakerai.session.SessionManager.startSession()
+        com.reelmakerai.analytics.AnalyticsTracker.logEvent(EventType.APP_LAUNCH)
+
+        engagementMonitor = EngagementMonitor {
+            findViewById<View>(R.id.engagementOverlay)?.visibility = View.VISIBLE
+        }
+        engagementMonitor.start()
+
+        findViewById<View>(R.id.btnVideo).setOnClickListener {
+            com.reelmakerai.analytics.AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Video")
+            // ...
+        }
+    }
 }
