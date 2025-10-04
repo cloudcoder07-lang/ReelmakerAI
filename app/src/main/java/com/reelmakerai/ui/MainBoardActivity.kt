@@ -83,5 +83,10 @@ class MainBoardActivity : AppCompatActivity() {
 
         dialog.show()
     }
+    val summary = com.reelmakerai.analytics.GrowthDashboard.getSummary()
+    val summaryText = summary.joinToString("\n") {
+        "${it.name}: Views=${it.views}, Unlocks=${it.unlocks}, Exports=${it.exports}"
+    }
+    findViewById<TextView>(R.id.summaryContent)?.text = summaryText
 
 }

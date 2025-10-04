@@ -10,5 +10,7 @@ object PackUnlockManager {
 
     fun unlock(packName: String) {
         unlockedPacks.add(packName)
+        com.reelmakerai.analytics.UnlockTelemetry.logUnlock(packName, "manual")
     }
+
 }
