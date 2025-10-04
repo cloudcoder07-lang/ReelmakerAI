@@ -18,4 +18,9 @@ object CdnAssetLoader {
             }
         }
     }
+    val cached = com.reelmakerai.network.OfflineCacheManager.getCachedFile(context, filename)
+    if (cached != null) {
+        return BitmapFactory.decodeFile(cached.absolutePath)
+    }
+
 }

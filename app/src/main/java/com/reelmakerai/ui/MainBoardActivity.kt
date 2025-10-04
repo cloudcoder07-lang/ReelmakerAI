@@ -87,6 +87,15 @@ class MainBoardActivity : AppCompatActivity() {
     val summaryText = summary.joinToString("\n") {
         "${it.name}: Views=${it.views}, Unlocks=${it.unlocks}, Exports=${it.exports}"
     }
+
     findViewById<TextView>(R.id.summaryContent)?.text = summaryText
+    val isOnline = com.reelmakerai.network.NetworkStatusMonitor.isOnline(this)
+    val banner = findViewById<View>(R.id.offlineBanner)
+    val message = findViewById<TextView>(R.id.offlineMessage)
+
+    if (!isOnline) {
+        com.reelmakerai.ui.FallbackUiController.showOfflineBanner(banner, message)
+    }
+
 
 }
