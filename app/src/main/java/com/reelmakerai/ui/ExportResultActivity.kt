@@ -17,4 +17,24 @@ class ExportResultActivity : AppCompatActivity() {
         videoView.setVideoURI(outputUri)
         videoView.start()
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_export_result)
+
+        val videoView = findViewById<VideoView>(R.id.finalVideoView)
+        val outputUri = intent.getParcelableExtra<Uri>("outputUri")
+        videoView.setVideoURI(outputUri)
+        videoView.start()
+
+        findViewById<Button>(R.id.btnShare)?.setOnClickListener {
+            outputUri?.let { uri ->
+                com.reelmakerai.social.ShareManager.shareVideo(this, uri)
+            }
+        }
+
+        findViewById<Button>(R.id.btnInvite)?.setOnClickListener {
+            com.reelmakerai.social.ReferralEngine.inviteFriend(this)
+        }
+    }
+
 }

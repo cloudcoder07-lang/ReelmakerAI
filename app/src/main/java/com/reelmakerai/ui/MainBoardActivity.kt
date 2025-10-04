@@ -65,4 +65,23 @@ class MainBoardActivity : AppCompatActivity() {
             // ...
         }
     }
+    private fun promptUnlock(packName: String) {
+        val dialogView = layoutInflater.inflate(R.layout.unlock_dialog, null)
+        val dialog = android.app.AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        dialogView.findViewById<Button>(R.id.btnWatchAd).setOnClickListener {
+            com.reelmakerai.monetization.RewardTrigger.showAdAndUnlock(this, packName)
+            dialog.dismiss()
+        }
+
+        dialogView.findViewById<Button>(R.id.btnPurchase).setOnClickListener {
+            com.reelmakerai.monetization.IapScaffold.purchasePack(this, packName)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
 }
