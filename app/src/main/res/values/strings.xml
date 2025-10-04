@@ -7,3 +7,9 @@
     <string name="collage">Collage</string>
     <string name="whats_new">WHAT%92S NEW:</string>
 </resources>
+
+<string-array name="supported_languages">
+<item>English</item>
+<item>Hindi</item>
+<item>Spanish</item>
+</string-array>
