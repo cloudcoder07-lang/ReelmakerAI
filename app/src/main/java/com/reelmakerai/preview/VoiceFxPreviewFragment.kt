@@ -89,4 +89,11 @@ class VoiceFxPreviewFragment : Fragment() {
 
     val fx = VoiceFxProcessor.applyEffect(buffer.copyOf(read), currentEffect)
 
+    private var currentEffect = com.reelmakerai.ui.UiMemory.lastUsedFx ?: EffectType.ROBOT
+
+    fun switchEffect(type: EffectType) {
+        currentEffect = type
+        com.reelmakerai.ui.UiMemory.lastUsedFx = type
+    }
+
 }

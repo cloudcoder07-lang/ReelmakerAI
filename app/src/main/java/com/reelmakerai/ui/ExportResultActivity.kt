@@ -16,6 +16,13 @@ class ExportResultActivity : AppCompatActivity() {
         val outputUri = intent.getParcelableExtra<Uri>("outputUri")
         videoView.setVideoURI(outputUri)
         videoView.start()
+
+        videoView.setOnPreparedListener {
+            it.setVolume(1f, 1f)
+            it.start()
+            findViewById<View>(R.id.finalExportOverlay)?.visibility = View.VISIBLE
+        }
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

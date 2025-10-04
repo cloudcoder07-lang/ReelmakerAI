@@ -97,5 +97,11 @@ class MainBoardActivity : AppCompatActivity() {
         com.reelmakerai.ui.FallbackUiController.showOfflineBanner(banner, message)
     }
 
+    val container = findViewById<FrameLayout>(R.id.dynamicUiContainer)
+    val welcomeView = AiUiGenerator.generateWelcomeView(this)
+    container.addView(welcomeView)
+
+    val ready = com.reelmakerai.release.ReleaseChecklist.validate()
+    com.reelmakerai.release.LaunchReady.isReady = ready
 
 }
