@@ -107,4 +107,13 @@ class MainBoardActivity : AppCompatActivity() {
     val changelog = com.reelmakerai.release.ChangelogGenerator.generate()
     findViewById<TextView>(R.id.changelogText)?.text = changelog
 
+    lifecycleScope.launch {
+        val success = AssetSyncManager.syncFromGitHub(this@MainBoardActivity)
+        val file = File(filesDir, "manifest.json")
+        val valid = ManifestValidator.validate(file)
+        if (success && valid) {
+            ReleaseLock.unlock()
+        }
+    }
+
 }
