@@ -9,4 +9,12 @@ class ExportManager {
         val muxer = AudioMuxer()
         return muxer.muxAudioVideo(videoInput, audioInput, output)
     }
+    fun exportFinalVideo(videoInput: File, audioInput: File, output: File, preset: ExportPreset): Boolean {
+        if (MonetizationToggle.showWatermark) {
+            // TODO: Apply watermark overlay before muxing
+        }
+        val muxer = AudioMuxer()
+        return muxer.muxAudioVideo(videoInput, audioInput, output)
+    }
+
 }

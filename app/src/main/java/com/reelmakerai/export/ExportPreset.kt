@@ -1,31 +1,13 @@
 package com.reelmakerai.export
 
 data class ExportPreset(
-    val name: String,
-    val lutUrl: String,
-    val watermarkUrl: String,
-    val voiceFxEnabled: Boolean
+    val resolution: String,
+    val bitrateKbps: Int,
+    val codec: String
 )
 
-object ExportPresets {
-    val presets = listOf(
-        ExportPreset(
-            name = "Epic",
-            lutUrl = "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/luts/lut_epic.png",
-            watermarkUrl = "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/watermarks/epic.png",
-            voiceFxEnabled = true
-        ),
-        ExportPreset(
-            name = "Romantic",
-            lutUrl = "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/luts/lut_romantic.png",
-            watermarkUrl = "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/watermarks/romantic.png",
-            voiceFxEnabled = false
-        ),
-        ExportPreset(
-            name = "Dark",
-            lutUrl = "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/luts/lut_dark.png",
-            watermarkUrl = "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/watermarks/dark.png",
-            voiceFxEnabled = true
-        )
-    )
+object PresetLibrary {
+    val default = ExportPreset("720p", 2500, "H.264")
+    val highQuality = ExportPreset("1080p", 5000, "H.265")
+    val lite = ExportPreset("480p", 1200, "H.264")
 }
