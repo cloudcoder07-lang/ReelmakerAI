@@ -24,7 +24,7 @@
         <activity android:name=".ui.VideoPreviewActivity" android:exported="true" />
         <activity android:name=".ui.PhotoEditorActivity" android:exported="true" />
         <activity android:name=".ui.CollageEditorActivity" android:exported="true" />
-        <activity android:name=".ui.MainBoardActivity" android:exported="true"/>
+        <activity android:name=".ui.MainBoardActivity" android:exported="true" android:theme="@style/Theme.ReelMakerAI"/>
         <activity android:name=".ui.ExportResultActivity" android:exported="true" >
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

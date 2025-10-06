@@ -13,7 +13,7 @@
 
         <!-- App Title -->
         <TextView
-            android:text="ReelMakerAI"
+            android:text="@string/app_name"
             android:textSize="24sp"
             android:textColor="#4E342E"
             android:gravity="center"
@@ -23,7 +23,7 @@
 
         <!-- CREATE NEW Section -->
         <TextView
-            android:text="CREATE NEW"
+            android:text="@string/create_new"
             android:textSize="16sp"
             android:textColor="#4E342E"
             android:layout_marginBottom="8dp"
@@ -62,13 +62,14 @@
                     android:layout_height="64dp"
                     android:src="@drawable/ic_video"
                     android:backgroundTint="#E91E63"
-                    app:tint="#FFFFFF"
-                    android:background="@android:color/transparent" />
+                    app:tint="#FFFFFF" />
                 <TextView
-                    android:text="Video"
+                    android:text="@string/video"
                     android:textColor="#333333"
                     android:textSize="12sp"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -83,13 +84,14 @@
                     android:layout_height="64dp"
                     android:src="@drawable/ic_photo"
                     android:backgroundTint="#FF9800"
-                    app:tint="#FFFFFF"
-                    android:background="@android:color/transparent" />
+                    app:tint="#FFFFFF" />
                 <TextView
-                    android:text="Photo"
+                    android:text="@string/photo"
                     android:textColor="#333333"
                     android:textSize="12sp"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -104,13 +106,14 @@
                     android:layout_height="64dp"
                     android:src="@drawable/ic_collage"
                     android:backgroundTint="#FF9800"
-                    app:tint="#FFFFFF"
-                    android:background="@android:color/transparent" />
+                    app:tint="#FFFFFF" />
                 <TextView
-                    android:text="Collage"
+                    android:text="@string/collage"
                     android:textColor="#333333"
                     android:textSize="12sp"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
 
@@ -126,14 +129,14 @@
                 android:id="@+id/btnInvite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Invite"
+                android:text="@string/invite"
                 android:layout_marginEnd="16dp" />
 
             <Button
                 android:id="@+id/btnShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Share" />
+                android:text="@string/share" />
         </LinearLayout>
 
         <!-- What's New -->
@@ -141,7 +144,7 @@
             android:id="@+id/whatsNewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WHAT'S NEW"
+            android:text="@string/whats_new"
             android:textSize="16sp"
             android:textColor="#4E342E"
             android:layout_marginBottom="8dp" />
@@ -183,7 +186,7 @@
             android:id="@+id/changelogText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Changelog will appear here"
+            android:text="@string/changelog_placeholder"
             android:textSize="14sp"
             android:textColor="#333333"
             android:layout_marginBottom="12dp" />
@@ -193,7 +196,7 @@
             android:id="@+id/summaryContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Summary will appear here"
+            android:text="@string/summary_placeholder"
             android:textSize="14sp"
             android:textColor="#333333"
             android:layout_marginBottom="12dp" />
@@ -212,14 +215,14 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_dialog_alert"
-                android:tint="#B71C1C"
+                app:tint="#B71C1C"
                 android:layout_marginEnd="8dp" />
 
             <TextView
                 android:id="@+id/offlineMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You are offline"
+                android:text="@string/offline_message"
                 android:textColor="#B71C1C"
                 android:textSize="14sp" />
         </LinearLayout>

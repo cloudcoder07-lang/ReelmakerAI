@@ -3,9 +3,7 @@ package com.reelmakerai.ui
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.reelmakerai.R
@@ -56,7 +54,7 @@ class MainBoardActivity : AppCompatActivity() {
         }
         engagementMonitor.start()
 
-        findViewById<Button>(R.id.btnVideo)?.setOnClickListener {
+        findViewById<LinearLayout>(R.id.btnVideo)?.setOnClickListener {
             AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Video")
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, VoiceFxPreviewFragment())
