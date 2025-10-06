@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import com.reelmakerai.audio.VoiceFxProcessor
 import kotlinx.coroutines.*
 
-class VoiceFxPreviewFragment : Fragment() {
+class `VoiceFxPreviewFragment-old` : Fragment() {
 
     private val sampleRate = 16000
     private val bufferSize = AudioRecord.getMinBufferSize(

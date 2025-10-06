@@ -12,22 +12,18 @@ import com.reelmakerai.R
 import com.reelmakerai.analytics.AnalyticsTracker
 import com.reelmakerai.analytics.EventType
 import com.reelmakerai.analytics.EngagementMonitor
-import com.reelmakerai.analytics.IdleRefreshTrigger
 import com.reelmakerai.assets.AssetSyncManager
 import com.reelmakerai.assets.ManifestValidator
 import com.reelmakerai.branding.PackUpdateManager
 import com.reelmakerai.localization.LocalizationManager
-import com.reelmakerai.monetization.PackUnlockManager
 import com.reelmakerai.network.NetworkStatusMonitor
-import com.reelmakerai.preview.VoiceFxPreviewFragment
+import com.reelmakerai.preview.`VoiceFxPreviewFragment-old`
 import com.reelmakerai.referral.ReferralEngine
 import com.reelmakerai.release.ChangelogGenerator
-import com.reelmakerai.release.FallbackUiController
 import com.reelmakerai.release.GrowthDashboard
 import com.reelmakerai.release.LaunchReady
 import com.reelmakerai.release.ReleaseChecklist
 import com.reelmakerai.release.ReleaseLock
-import com.reelmakerai.seo.AiUiGenerator
 import com.reelmakerai.session.SessionManager
 import com.reelmakerai.share.ShareManager
 import kotlinx.coroutines.launch
@@ -63,7 +59,7 @@ class MainBoardActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnVideo)?.setOnClickListener {
             AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Video")
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, VoiceFxPreviewFragment())
+                .replace(R.id.fragmentContainer, `VoiceFxPreviewFragment-old`())
                 .commit()
         }
 

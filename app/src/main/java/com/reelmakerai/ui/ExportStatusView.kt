@@ -1,32 +1,25 @@
-package com.reelmakerai.ui
+package com.reelmakerai.ui.components
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.LinearLayout
-import android.widget.ProgressBar
+import android.view.View
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.reelmakerai.R
 
 class ExportStatusView @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null
-) : LinearLayout(context, attrs) {
+    context: Context, attrs: AttributeSet? = null
+) : ConstraintLayout(context, attrs) {
 
-    private val progressBar: ProgressBar
     private val statusText: TextView
 
     init {
-        inflate(context, R.layout.view_export_status, this)
-        progressBar = findViewById(R.id.exportProgress)
-        statusText = findViewById(R.id.exportStatusText)
+        View.inflate(context, R.layout.view_export_status, this)
+        statusText = findViewById(R.id.statusText)
     }
 
-    fun showStatus(message: String) {
+    fun setMessage(message: String) {
         statusText.text = message
-        progressBar.visibility = VISIBLE
-    }
-
-    fun hideStatus() {
-        progressBar.visibility = GONE
+        visibility = View.VISIBLE
     }
 }

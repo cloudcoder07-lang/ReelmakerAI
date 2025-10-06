@@ -38,7 +38,7 @@ class VideoPreviewActivity : AppCompatActivity() {
 
     private fun launchVoicePreview() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.previewContainer, com.reelmakerai.preview.VoiceFxPreviewFragment())
+            .replace(R.id.previewContainer, com.reelmakerai.preview.`VoiceFxPreviewFragment-old`())
             .commit()
     }
 

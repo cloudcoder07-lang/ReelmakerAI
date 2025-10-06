@@ -173,7 +173,8 @@ class ExportFragment : Fragment() {
     }
 
     private fun showProgress(message: String) {
-        binding.exportStatusView?.visibility = View.VISIBLE
+        binding.
+        exportStatusView?.visibility = View.VISIBLE
         binding.exportStatusView?.setMessage(message)
     }
 
