@@ -17,7 +17,7 @@ import com.reelmakerai.assets.ManifestValidator
 import com.reelmakerai.branding.PackUpdateManager
 import com.reelmakerai.localization.LocalizationManager
 import com.reelmakerai.network.NetworkStatusMonitor
-import com.reelmakerai.preview.`VoiceFxPreviewFragment-old`
+import com.reelmakerai.preview.VoiceFxPreviewFragment
 import com.reelmakerai.referral.ReferralEngine
 import com.reelmakerai.release.ChangelogGenerator
 import com.reelmakerai.release.GrowthDashboard
@@ -59,7 +59,7 @@ class MainBoardActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnVideo)?.setOnClickListener {
             AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Video")
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, `VoiceFxPreviewFragment-old`())
+                .replace(R.id.fragmentContainer, VoiceFxPreviewFragment())
                 .commit()
         }
 
@@ -80,8 +80,8 @@ class MainBoardActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.changelogText)?.text = changelog
 
         val summary = GrowthDashboard.getSummary()
-        val summaryText = summary.joinToString("\n") {
-            "${it.name}: Views=${it.views}, Unlocks=${it.unlocks}, Exports=${it.exports}"
+        val summaryText = summary.joinToString("\n") { metric ->
+            "${metric.name}: Views=${metric.views}, Unlocks=${metric.unlocks}, Exports=${metric.exports}"
         }
         findViewById<TextView>(R.id.summaryContent)?.text = summaryText
 

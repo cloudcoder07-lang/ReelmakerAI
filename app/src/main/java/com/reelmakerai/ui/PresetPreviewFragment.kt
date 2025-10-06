@@ -22,7 +22,7 @@ class PresetPreviewFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = PresetPreviewAdapter(ExportPresets.presets) { selected ->
+        val adapter = PresetPreviewAdapter(ExportPresets.all) { selected ->
             // TODO: Apply selected preset to export engine
         }
         binding.presetRecycler.adapter = adapter

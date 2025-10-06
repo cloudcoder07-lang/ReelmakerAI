@@ -16,7 +16,9 @@ class IntroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_intro)
 
         val logo = findViewById<View>(R.id.logo)
+        val branding = findViewById<View>(R.id.brandingText)
         UiAnimator.fadeIn(logo)
+        UiAnimator.fadeIn(branding)
 
         Handler(mainLooper).postDelayed({
             TransitionManager.fadeTo(this, MainBoardActivity::class.java)

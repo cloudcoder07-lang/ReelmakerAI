@@ -8,7 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.reelmakerai.R
 
 class ExportStatusView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null
+    context: Context,
+    attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
 
     private val statusText: TextView

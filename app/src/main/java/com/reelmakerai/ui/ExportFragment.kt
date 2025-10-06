@@ -19,6 +19,7 @@ import jp.co.cyberagent.android.gpuimage.GPUImageView
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageLookupFilter
 import java.io.File
 import java.net.URL
+import com.reelmakerai.ui.components.ExportStatusView
 
 class ExportFragment : Fragment() {
 
@@ -173,8 +174,7 @@ class ExportFragment : Fragment() {
     }
 
     private fun showProgress(message: String) {
-        binding.
-        exportStatusView?.visibility = View.VISIBLE
+        binding.exportStatusView?.visibility = View.VISIBLE
         binding.exportStatusView?.setMessage(message)
     }
 
