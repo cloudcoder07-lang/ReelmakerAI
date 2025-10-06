@@ -1,20 +1,20 @@
 package com.reelmakerai.ads
 
 import android.content.Context
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+import android.widget.Toast
+import com.reelmakerai.monetization.PackUnlockManager
+import com.reelmakerai.analytics.UnlockTelemetry
 
 object AdManager {
 
-    fun loadBannerAd(context: Context, container: ViewGroup) {
-        MobileAds.initialize(context)
-        val adView = AdView(context)
-        adView.adUnitId = "ca-app-pub-xxxxxxxxxxxxxxxx/banner"
-        adView.adSize = com.google.android.gms.ads.AdSize.BANNER
-        container.addView(adView)
-        adView.loadAd(AdRequest.Builder().build())
+    fun showRewardedAd(context: Context, packName: String) {
+        // Simulate ad flow for now
+        Toast.makeText(context, "Simulating rewarded ad...", Toast.LENGTH_SHORT).show()
+
+        // Unlock the pack
+        PackUnlockManager.unlock(packName)
+
+        // Log unlock telemetry
+        UnlockTelemetry.logUnlock(packName, "rewarded_ad")
     }
 }

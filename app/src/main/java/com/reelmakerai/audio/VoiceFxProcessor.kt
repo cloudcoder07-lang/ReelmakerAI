@@ -1,13 +1,12 @@
 package com.reelmakerai.audio
 
-object VoiceFxProcessor {
+import android.util.Log
 
-    fun applyRobotEffect(input: ShortArray): ShortArray {
-        return input.mapIndexed { i, sample ->
-            val modulated = sample * Math.sin(2 * Math.PI * i / 30).toFloat()
-            modulated.toInt().coerceIn(Short.MIN_VALUE.toInt(), Short.MAX_VALUE.toInt()).toShort()
-        }.toShortArray()
+object VoiceFxProcessorCore {
+
+    fun applyEffect(input: ByteArray, type: EffectType): ByteArray {
+        Log.d("VoiceFxProcessor", "Applying effect: ${type.name}")
+        // Placeholder: return input unchanged
+        return input
     }
-
-    // TODO: Add pitch shift, echo, dramatic FX
 }

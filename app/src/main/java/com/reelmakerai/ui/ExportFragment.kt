@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.reelmakerai.databinding.FragmentExportBinding
 import com.reelmakerai.export.*
@@ -52,7 +54,7 @@ class ExportFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.moodLabel.text = "Mood: ${selectedMood ?: "Unknown"}"
-        binding.exportStatusView?.showProgress()
+        showProgress("Preparing preview...")
 
         val moodToLutUrl = mapOf(
             "Happy" to "https://cdn.jsdelivr.net/gh/cloudcoder07/reelmaker-assets/luts/lut_happy.png",
@@ -66,14 +68,14 @@ class ExportFragment : Fragment() {
         if (lutUrl != null) {
             applyLutToPreview(binding.gpuPreview, lutUrl!!)
         } else {
-            binding.exportStatusView?.showError("No LUT found for mood: $selectedMood")
+            showError("No LUT found for mood: $selectedMood")
         }
 
         binding.exportButton.setOnClickListener {
             if (lutUrl != null) {
                 startExportFlow(lutUrl!!)
             } else {
-                binding.exportStatusView?.showError("Cannot export: LUT missing")
+                showError("Cannot export: LUT missing")
             }
         }
     }
@@ -94,16 +96,19 @@ class ExportFragment : Fragment() {
 
                 requireActivity().runOnUiThread {
                     gpuImageView.filter = filter
+                    showProgress("Preview ready")
                 }
             } catch (e: Exception) {
                 requireActivity().runOnUiThread {
-                    binding.exportStatusView?.showError("Failed to load LUT: ${e.message}")
+                    showError("Failed to load LUT: ${e.message}")
                 }
             }
         }.start()
     }
 
     private fun startExportFlow(lutUrl: String) {
+        showProgress("Exporting video...")
+
         Thread {
             try {
                 val inputPath = "/sdcard/input.mp4" // Replace with actual input path
@@ -116,7 +121,7 @@ class ExportFragment : Fragment() {
                     null
                 }
 
-                val overlays = listOf<OverlayItem>() // Add overlays if needed
+                val overlays = listOf<OverlayItem>()
                 val exportHD = !ProFeatureManager.isFeatureLocked("export_hd")
 
                 val task = ExportTask(
@@ -133,13 +138,13 @@ class ExportFragment : Fragment() {
                 VideoExportEngine.export(requireContext(), task, object : ExportCallback {
                     override fun onProgress(percent: Int) {
                         requireActivity().runOnUiThread {
-                            binding.exportStatusView?.updateProgress(percent)
+                            updateProgress(percent)
                         }
                     }
 
                     override fun onComplete(outputFile: File) {
                         requireActivity().runOnUiThread {
-                            binding.exportStatusView?.showCompleted()
+                            showCompleted()
 
                             val shareIntent = Intent(Intent.ACTION_SEND).apply {
                                 type = "video/mp4"
@@ -154,17 +159,35 @@ class ExportFragment : Fragment() {
 
                     override fun onError(message: String) {
                         requireActivity().runOnUiThread {
-                            binding.exportStatusView?.showError(message)
+                            showError(message)
                         }
                     }
                 })
 
             } catch (e: Exception) {
                 requireActivity().runOnUiThread {
-                    binding.exportStatusView?.showError("Export failed: ${e.message}")
+                    showError("Export failed: ${e.message}")
                 }
             }
         }.start()
+    }
+
+    private fun showProgress(message: String) {
+        binding.exportStatusView?.visibility = View.VISIBLE
+        binding.exportStatusView?.setMessage(message)
+    }
+
+    private fun showError(message: String) {
+        binding.exportStatusView?.visibility = View.VISIBLE
+        binding.exportStatusView?.setMessage("Error: $message")
+    }
+
+    private fun updateProgress(percent: Int) {
+        binding.exportStatusView?.setMessage("Exporting... $percent%")
+    }
+
+    private fun showCompleted() {
+        binding.exportStatusView?.setMessage("Export complete!")
     }
 
     override fun onDestroyView() {

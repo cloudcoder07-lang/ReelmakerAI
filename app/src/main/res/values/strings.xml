@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReelMakerAI</string>
-    <string name="create_new">CREATE NEW</string>
-    <string name="video">Video</string>
-    <string name="photo">Photo</string>
-    <string name="collage">Collage</string>
-    <string name="whats_new">WHAT%92S NEW:</string>
-</resources>
 
-<string-array name="supported_languages">
-<item>English</item>
-<item>Hindi</item>
-<item>Spanish</item>
-</string-array>
+    <!-- App Name -->
+    <string name="app_name">ReelMakerAI</string>
+
+    <!-- UI Labels -->
+    <string name="btn_share">Share Reel</string>
+    <string name="btn_invite">Invite Friend</string>
+    <string name="btn_video">Create Video</string>
+    <string name="btn_watch_ad">Watch Ad to Unlock</string>
+    <string name="btn_purchase">Purchase Pack</string>
+    <string name="btn_retry">Retry</string>
+
+    <!-- Messages -->
+    <string name="whats_new">WHAT%92S NEW:</string>
+    <string name="offline_message">You%92re offline. Some features may be limited.</string>
+    <string name="syncing_assets">Syncing assets...</string>
+    <string name="export_complete">Export complete!</string>
+    <string name="welcome_back">Welcome back to ReelMakerAI!</string>
+    <string name="unlock_prompt">Unlock this pack?</string>
+    <string name="loading_changelog">Loading changelog...</string>
+    <string name="growth_summary">Growth Summary</string>
+
+    <!-- Voice FX Labels -->
+    <string name="fx_robot">Robot</string>
+    <string name="fx_echo">Echo</string>
+    <string name="fx_chipmunk">Chipmunk</string>
+    <string name="fx_deep">Deep</string>
+
+    <!-- Supported Languages -->
+    <string-array name="supported_languages">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Spanish</item>
+    </string-array>
+
+</resources>

@@ -1,43 +1,52 @@
 package com.reelmakerai.ui
 
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.reelmakerai.R
+import com.reelmakerai.analytics.AnalyticsTracker
+import com.reelmakerai.analytics.EventType
+import com.reelmakerai.analytics.EngagementMonitor
+import com.reelmakerai.analytics.IdleRefreshTrigger
+import com.reelmakerai.assets.AssetSyncManager
+import com.reelmakerai.assets.ManifestValidator
+import com.reelmakerai.branding.PackUpdateManager
+import com.reelmakerai.localization.LocalizationManager
+import com.reelmakerai.monetization.PackUnlockManager
+import com.reelmakerai.network.NetworkStatusMonitor
+import com.reelmakerai.preview.VoiceFxPreviewFragment
+import com.reelmakerai.referral.ReferralEngine
+import com.reelmakerai.release.ChangelogGenerator
+import com.reelmakerai.release.FallbackUiController
+import com.reelmakerai.release.GrowthDashboard
+import com.reelmakerai.release.LaunchReady
+import com.reelmakerai.release.ReleaseChecklist
+import com.reelmakerai.release.ReleaseLock
+import com.reelmakerai.seo.AiUiGenerator
+import com.reelmakerai.session.SessionManager
+import com.reelmakerai.share.ShareManager
+import kotlinx.coroutines.launch
+import java.io.File
 
 class MainBoardActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_board)
-
-        // Set dynamic "What's New" label
-        val whatsNewLabel = getString(R.string.whats_new) + " Bloom Pack"
-        findViewById<TextView>(R.id.whatsNewText)?.text = whatsNewLabel
-
-        findViewById<android.view.View>(R.id.btnVideo).setOnClickListener {
-            Toast.makeText(this, "Create Video clicked", Toast.LENGTH_SHORT).show()
-            // TODO: Launch video creation flow
-        }
-
-        findViewById<android.view.View>(R.id.btnPhoto).setOnClickListener {
-            Toast.makeText(this, "Create Photo clicked", Toast.LENGTH_SHORT).show()
-            // TODO: Launch photo editor
-        }
-
-        findViewById<android.view.View>(R.id.btnCollage).setOnClickListener {
-            Toast.makeText(this, "Create Collage clicked", Toast.LENGTH_SHORT).show()
-            // TODO: Launch collage editor
-        }
-    }
+    private lateinit var engagementMonitor: EngagementMonitor
     private lateinit var idleRefresh: IdleRefreshTrigger
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LocalizationManager.setLocale(this, "en")
         setContentView(R.layout.activity_main_board)
 
-        val packLabel = com.reelmakerai.branding.PackUpdateManager.getCurrentPack().name
+        SessionManager.startSession()
+        AnalyticsTracker.logEvent(EventType.APP_LAUNCH)
+
+        val packLabel = PackUpdateManager.getCurrentPack().name
         findViewById<TextView>(R.id.whatsNewText)?.text = "WHAT'S NEW: $packLabel"
 
         idleRefresh = IdleRefreshTrigger {
@@ -45,75 +54,65 @@ class MainBoardActivity : AppCompatActivity() {
             recreate()
         }
         idleRefresh.start()
-    }
-    private lateinit var engagementMonitor: EngagementMonitor
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_board)
-
-        com.reelmakerai.session.SessionManager.startSession()
-        com.reelmakerai.analytics.AnalyticsTracker.logEvent(EventType.APP_LAUNCH)
 
         engagementMonitor = EngagementMonitor {
             findViewById<View>(R.id.engagementOverlay)?.visibility = View.VISIBLE
         }
         engagementMonitor.start()
 
-        findViewById<View>(R.id.btnVideo).setOnClickListener {
-            com.reelmakerai.analytics.AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Video")
-            // ...
-        }
-    }
-    private fun promptUnlock(packName: String) {
-        val dialogView = layoutInflater.inflate(R.layout.unlock_dialog, null)
-        val dialog = android.app.AlertDialog.Builder(this)
-            .setView(dialogView)
-            .create()
-
-        dialogView.findViewById<Button>(R.id.btnWatchAd).setOnClickListener {
-            com.reelmakerai.monetization.RewardTrigger.showAdAndUnlock(this, packName)
-            dialog.dismiss()
+        findViewById<Button>(R.id.btnVideo)?.setOnClickListener {
+            AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Video")
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, VoiceFxPreviewFragment())
+                .commit()
         }
 
-        dialogView.findViewById<Button>(R.id.btnPurchase).setOnClickListener {
-            com.reelmakerai.monetization.IapScaffold.purchasePack(this, packName)
-            dialog.dismiss()
+        findViewById<Button>(R.id.btnInvite)?.setOnClickListener {
+            ReferralEngine.inviteFriend(this)
         }
 
-        dialog.show()
-    }
-    val summary = com.reelmakerai.analytics.GrowthDashboard.getSummary()
-    val summaryText = summary.joinToString("\n") {
-        "${it.name}: Views=${it.views}, Unlocks=${it.unlocks}, Exports=${it.exports}"
-    }
-
-    findViewById<TextView>(R.id.summaryContent)?.text = summaryText
-    val isOnline = com.reelmakerai.network.NetworkStatusMonitor.isOnline(this)
-    val banner = findViewById<View>(R.id.offlineBanner)
-    val message = findViewById<TextView>(R.id.offlineMessage)
-
-    if (!isOnline) {
-        com.reelmakerai.ui.FallbackUiController.showOfflineBanner(banner, message)
-    }
-
-    val container = findViewById<FrameLayout>(R.id.dynamicUiContainer)
-    val welcomeView = AiUiGenerator.generateWelcomeView(this)
-    container.addView(welcomeView)
-
-    val ready = com.reelmakerai.release.ReleaseChecklist.validate()
-    com.reelmakerai.release.LaunchReady.isReady = ready
-
-    val changelog = com.reelmakerai.release.ChangelogGenerator.generate()
-    findViewById<TextView>(R.id.changelogText)?.text = changelog
-
-    lifecycleScope.launch {
-        val success = AssetSyncManager.syncFromGitHub(this@MainBoardActivity)
-        val file = File(filesDir, "manifest.json")
-        val valid = ManifestValidator.validate(file)
-        if (success && valid) {
-            ReleaseLock.unlock()
+        findViewById<Button>(R.id.btnShare)?.setOnClickListener {
+            val dummyUri = Uri.parse("file://dummy.mp4")
+            ShareManager.shareVideo(this, dummyUri)
         }
+
+        val container = findViewById<FrameLayout>(R.id.dynamicUiContainer)
+        val welcomeView = AiUiGenerator.generateWelcomeView(this)
+        container.addView(welcomeView)
+
+        val changelog = ChangelogGenerator.generate()
+        findViewById<TextView>(R.id.changelogText)?.text = changelog
+
+        val summary = GrowthDashboard.getSummary()
+        val summaryText = summary.joinToString("\n") {
+            "${it.name}: Views=${it.views}, Unlocks=${it.unlocks}, Exports=${it.exports}"
+        }
+        findViewById<TextView>(R.id.summaryContent)?.text = summaryText
+
+        val isOnline = NetworkStatusMonitor.isOnline(this)
+        val banner = findViewById<View>(R.id.offlineBanner)
+        val message = findViewById<TextView>(R.id.offlineMessage)
+        if (!isOnline) {
+            FallbackUiController.showOfflineBanner(banner, message)
+        }
+
+        lifecycleScope.launch {
+            val success = AssetSyncManager.syncFromGitHub(this@MainBoardActivity)
+            val file = File(filesDir, "manifest.json")
+            val valid = ManifestValidator.validate(file)
+            if (success && valid) {
+                ReleaseLock.unlock()
+            }
+        }
+
+        val ready = ReleaseChecklist.validate()
+        LaunchReady.isReady = ready
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        SessionManager.endSession()
+        idleRefresh.stop()
+        engagementMonitor.stop()
+    }
 }

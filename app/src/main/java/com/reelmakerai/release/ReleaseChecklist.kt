@@ -12,9 +12,5 @@ object ReleaseChecklist {
             "Telemetry + unlock tracking"
         ).all { it.isNotBlank() }
     }
-    fun validate(): Boolean {
-        val changelog = ChangelogGenerator.generate()
-        return changelog.isNotBlank() && changelog.contains("export")
-    }
 
 }

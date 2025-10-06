@@ -1,5 +1,5 @@
 package com.reelmakerai.audio
 
-class VoiceFXController {
+class VoiceFXController_old {
     // TODO: Add FX toggles, presets, and UI bindings
 }

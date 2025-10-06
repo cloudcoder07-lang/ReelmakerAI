@@ -1,99 +1,58 @@
 package com.reelmakerai.preview
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.media.*
+import android.media.AudioRecord
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.reelmakerai.audio.VoiceFxProcessor
-import kotlinx.coroutines.*
+import com.reelmakerai.audio.EffectType
+import com.reelmakerai.audio.VoiceFxProcessorCore
+import com.reelmakerai.audio.AudioRouter
+import com.reelmakerai.R
 
 class VoiceFxPreviewFragment : Fragment() {
 
-    private val sampleRate = 16000
-    private val bufferSize = AudioRecord.getMinBufferSize(
-        sampleRate,
-        AudioFormat.CHANNEL_IN_MONO,
-        AudioFormat.ENCODING_PCM_16BIT
-    )
+    private lateinit var recorder: AudioRecord
+    private var currentEffect: EffectType = EffectType.None
+    private val buffer = ByteArray(2048)
 
-    private var audioRecord: AudioRecord? = null
-    private var audioTrack: AudioTrack? = null
-    private var recordingJob: Job? = null
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            audioRecord = createAudioRecordSafely()
-            audioTrack = AudioTrack(
-                AudioManager.STREAM_MUSIC,
-                sampleRate,
-                AudioFormat.CHANNEL_OUT_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                bufferSize,
-                AudioTrack.MODE_STREAM
-            )
-            startPreview()
-        } else {
-            Toast.makeText(requireContext(), "Microphone permission required", Toast.LENGTH_SHORT).show()
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_voice_fx_preview, container, false)
     }
 
-    private fun startPreview() {
-        recordingJob = CoroutineScope(Dispatchers.IO).launch {
-            val buffer = ShortArray(bufferSize)
-            audioRecord?.startRecording()
-            audioTrack?.play()
+    override fun onStart() {
+        super.onStart()
+        recorder = AudioRouter.createRecorder(requireContext()) ?: return
+        recorder.startRecording()
+        startPreviewLoop()
+    }
 
-            while (isActive) {
-                val read = audioRecord?.read(buffer, 0, buffer.size) ?: 0
-                val fx = VoiceFxProcessor.applyRobotEffect(buffer.copyOf(read))
-                audioTrack?.write(fx, 0, fx.size)
+    private fun startPreviewLoop() {
+        Thread {
+            while (!Thread.interrupted()) {
+                val read = recorder.read(buffer, 0, buffer.size)
+                if (read > 0) {
+                    val input = buffer.copyOf(read)
+                    val output = VoiceFxProcessorCore.applyEffect(input, currentEffect)
+                    Log.d("VoiceFxPreview", "Applied ${currentEffect.name} to $read bytes")
+                }
             }
-        }
+        }.start()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        recordingJob?.cancel()
-        audioRecord?.stop()
-        audioRecord?.release()
-        audioTrack?.stop()
-        audioTrack?.release()
+    fun setEffect(effect: EffectType) {
+        currentEffect = effect
     }
 
-    private fun createAudioRecordSafely(): AudioRecord? {
-        return try {
-            AudioRecord(
-                MediaRecorder.AudioSource.MIC,
-                sampleRate,
-                AudioFormat.CHANNEL_IN_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                bufferSize
-            )
-        } catch (e: SecurityException) {
-            null
-        }
+    override fun onStop() {
+        super.onStop()
+        recorder.stop()
+        recorder.release()
     }
-    private var currentEffect = EffectType.ROBOT
-
-    fun switchEffect(type: EffectType) {
-        currentEffect = type
-    }
-
-    val fx = VoiceFxProcessor.applyEffect(buffer.copyOf(read), currentEffect)
-
-    private var currentEffect = com.reelmakerai.ui.UiMemory.lastUsedFx ?: EffectType.ROBOT
-
-    fun switchEffect(type: EffectType) {
-        currentEffect = type
-        com.reelmakerai.ui.UiMemory.lastUsedFx = type
-    }
-
 }

@@ -1,16 +1,23 @@
 package com.reelmakerai.branding
 
+import android.content.Context
+import com.reelmakerai.R
+
 object BrandingUtils {
 
-    fun getCurrentPackName(): String {
-        return "Bloom Pack"
+    fun getPackColor(context: Context, packName: String): Int {
+        return when (packName) {
+            "Starter Pack" -> context.getColor(R.color.starterPackColor)
+            "Pro Pack" -> context.getColor(R.color.proPackColor)
+            else -> context.getColor(R.color.defaultPackColor)
+        }
     }
 
-    fun getWhatsNewLabel(): String {
-        return "WHAT'S NEW: ${getCurrentPackName()}"
-    }
-    fun getLocalizedWhatsNew(context: Context): String {
-        val pack = PackUpdateManager.getCurrentPack().name
-        return context.getString(R.string.whats_new) + " $pack"
+    fun getPackTag(packName: String): String {
+        return when (packName) {
+            "Starter Pack" -> "#starter"
+            "Pro Pack" -> "#pro"
+            else -> "#reelmaker"
+        }
     }
 }

@@ -7,19 +7,23 @@ import android.graphics.Paint
 
 object FxThumbnailGenerator {
 
-    fun generateThumbnail(effectType: EffectType): Bitmap {
-        val bmp = Bitmap.createBitmap(128, 128, Bitmap.Config.ARGB_8888)
+    fun generate(effect: EffectType): Bitmap {
+        val bmp = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bmp)
         val paint = Paint().apply {
-            color = when (effectType) {
-                EffectType.ROBOT -> Color.RED
-                EffectType.ECHO -> Color.BLUE
-                EffectType.CHIPMUNK -> Color.GREEN
-                EffectType.DEEP -> Color.MAGENTA
+            color = when (effect) {
+                EffectType.None -> Color.GRAY
+                EffectType.Robot -> Color.RED
+                EffectType.Echo -> Color.BLUE
+                EffectType.Chipmunk -> Color.YELLOW
+                EffectType.Deep -> Color.GREEN
+                EffectType.Alien -> Color.MAGENTA
+                EffectType.Cave -> Color.CYAN
+                EffectType.Fast -> Color.LTGRAY
+                EffectType.Slow -> Color.DKGRAY
             }
-            style = Paint.Style.FILL
         }
-        canvas.drawCircle(64f, 64f, 48f, paint)
+        canvas.drawCircle(100f, 100f, 80f, paint)
         return bmp
     }
 }

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -35,7 +36,7 @@
             android:background="#009688"
             android:layout_marginBottom="12dp" />
 
-        <!-- White Rounded Rectangle with Buttons -->
+        <!-- Button Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +50,6 @@
             android:clipToPadding="false"
             android:layout_marginHorizontal="8dp">
 
-            <!-- Video Button -->
             <LinearLayout
                 android:id="@+id/btnVideo"
                 android:layout_width="0dp"
@@ -57,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center">
-
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
@@ -65,7 +64,6 @@
                     android:backgroundTint="#E91E63"
                     app:tint="#FFFFFF"
                     android:background="@android:color/transparent" />
-
                 <TextView
                     android:text="Video"
                     android:textColor="#333333"
@@ -73,7 +71,6 @@
                     android:layout_marginTop="4dp" />
             </LinearLayout>
 
-            <!-- Photo Button -->
             <LinearLayout
                 android:id="@+id/btnPhoto"
                 android:layout_width="0dp"
@@ -81,7 +78,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center">
-
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
@@ -89,7 +85,6 @@
                     android:backgroundTint="#FF9800"
                     app:tint="#FFFFFF"
                     android:background="@android:color/transparent" />
-
                 <TextView
                     android:text="Photo"
                     android:textColor="#333333"
@@ -97,7 +92,6 @@
                     android:layout_marginTop="4dp" />
             </LinearLayout>
 
-            <!-- Collage Button -->
             <LinearLayout
                 android:id="@+id/btnCollage"
                 android:layout_width="0dp"
@@ -105,7 +99,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center">
-
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
@@ -113,7 +106,6 @@
                     android:backgroundTint="#FF9800"
                     app:tint="#FFFFFF"
                     android:background="@android:color/transparent" />
-
                 <TextView
                     android:text="Collage"
                     android:textColor="#333333"
@@ -122,25 +114,37 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Dynamic What's New Label -->
+        <!-- Invite and Share Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="12dp">
+
+            <Button
+                android:id="@+id/btnInvite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Invite"
+                android:layout_marginEnd="16dp" />
+
+            <Button
+                android:id="@+id/btnShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share" />
+        </LinearLayout>
+
+        <!-- What's New -->
         <TextView
             android:id="@+id/whatsNewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/whats_new"
-            android:textSize="14sp"
-            android:textColor="#4E342E"
-            android:layout_marginBottom="12dp"
-            android:layout_gravity="center" />
-
-        <!-- WHAT'S NEW Section -->
-        <TextView
             android:text="WHAT'S NEW"
             android:textSize="16sp"
             android:textColor="#4E342E"
-            android:layout_marginBottom="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_marginBottom="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -166,5 +170,83 @@
                 android:layout_height="100dp"
                 android:src="@drawable/asset_new" />
         </LinearLayout>
+
+        <!-- Dynamic UI Container -->
+        <FrameLayout
+            android:id="@+id/dynamicUiContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Changelog -->
+        <TextView
+            android:id="@+id/changelogText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Changelog will appear here"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Summary -->
+        <TextView
+            android:id="@+id/summaryContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Summary will appear here"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Offline Banner -->
+        <LinearLayout
+            android:id="@+id/offlineBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFCDD2"
+            android:padding="8dp"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_dialog_alert"
+                android:tint="#B71C1C"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/offlineMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You are offline"
+                android:textColor="#B71C1C"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Refresh Overlay -->
+        <View
+            android:id="@+id/refreshOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#009688"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Engagement Overlay -->
+        <View
+            android:id="@+id/engagementOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#FF9800"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Fragment Container -->
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginBottom="16dp" />
     </LinearLayout>
 </ScrollView>
