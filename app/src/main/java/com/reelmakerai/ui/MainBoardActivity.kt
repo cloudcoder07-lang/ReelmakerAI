@@ -1,10 +1,13 @@
 package com.reelmakerai.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import com.reelmakerai.R
 import com.reelmakerai.analytics.AnalyticsTracker
@@ -13,15 +16,12 @@ import com.reelmakerai.analytics.EngagementMonitor
 import com.reelmakerai.assets.AssetSyncManager
 import com.reelmakerai.assets.ManifestValidator
 import com.reelmakerai.branding.PackUpdateManager
+import com.reelmakerai.export.AIStudioActivity
 import com.reelmakerai.localization.LocalizationManager
 import com.reelmakerai.network.NetworkStatusMonitor
 import com.reelmakerai.preview.VoiceFxPreviewFragment
 import com.reelmakerai.referral.ReferralEngine
-import com.reelmakerai.release.ChangelogGenerator
-import com.reelmakerai.release.GrowthDashboard
-import com.reelmakerai.release.LaunchReady
-import com.reelmakerai.release.ReleaseChecklist
-import com.reelmakerai.release.ReleaseLock
+import com.reelmakerai.release.*
 import com.reelmakerai.session.SessionManager
 import com.reelmakerai.share.ShareManager
 import kotlinx.coroutines.launch
@@ -31,6 +31,10 @@ class MainBoardActivity : AppCompatActivity() {
 
     private lateinit var engagementMonitor: EngagementMonitor
     private lateinit var idleRefresh: IdleRefreshTrigger
+
+    companion object {
+        private const val VIDEO_PICK_REQUEST = 101
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,21 +58,34 @@ class MainBoardActivity : AppCompatActivity() {
         }
         engagementMonitor.start()
 
-        findViewById<LinearLayout>(R.id.btnVideo)?.setOnClickListener {
+        // Modular click routing
+        findViewById<CardView>(R.id.btnVideo)?.setOnClickListener {
             AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Video")
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, VoiceFxPreviewFragment())
-                .commit()
+            launchSystemVideoPicker()
+        }
+
+        findViewById<CardView>(R.id.btnPhoto)?.setOnClickListener {
+            AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Photo")
+            MediaLauncher.launchPhotoEditor(this)
+        }
+
+        findViewById<CardView>(R.id.btnCollage)?.setOnClickListener {
+            AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Collage")
+            MediaLauncher.launchCollageBuilder(this)
         }
 
         findViewById<Button>(R.id.btnInvite)?.setOnClickListener {
+            AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Invite")
             ReferralEngine.inviteFriend(this)
         }
 
         findViewById<Button>(R.id.btnShare)?.setOnClickListener {
+            AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Share")
             val dummyUri = Uri.parse("file://dummy.mp4")
             ShareManager.shareVideo(this, dummyUri)
         }
+
+        ThumbnailInjector.inject(this)
 
         val container = findViewById<FrameLayout>(R.id.dynamicUiContainer)
         val welcomeView = AiUiGenerator.generateWelcomeView(this)
@@ -101,6 +118,29 @@ class MainBoardActivity : AppCompatActivity() {
 
         val ready = ReleaseChecklist.validate()
         LaunchReady.isReady = ready
+    }
+
+    private fun launchSystemVideoPicker() {
+        val intent = Intent(Intent.ACTION_PICK).apply {
+            type = "video/*"
+        }
+        startActivityForResult(intent, VIDEO_PICK_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == VIDEO_PICK_REQUEST && resultCode == RESULT_OK) {
+            val selectedVideoUri = data?.data
+            selectedVideoUri?.let {
+                val intent = Intent(this, AIStudioActivity::class.java).apply {
+                    putExtra("video_uri", it.toString())
+                }
+                startActivity(intent)
+            }
+        } else {
+            MediaLauncher.handleActivityResult(this, requestCode, resultCode, data)
+        }
     }
 
     override fun onDestroy() {

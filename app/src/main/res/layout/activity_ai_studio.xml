@@ -1,93 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="#121212"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/aiStudioRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black"
     android:padding="12dp">
 
+    <!-- Banner Ad Slot -->
     <FrameLayout
+        android:id="@+id/bannerAdContainer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="12dp">
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:background="#222222" />
 
-        <VideoView
-            android:id="@+id/videoView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true" />
-    </FrameLayout>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:layout_marginBottom="12dp">
-
-        <LinearLayout
-            android:id="@+id/toolBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-    </HorizontalScrollView>
-
+    <!-- Add + Export Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="12dp">
+        android:gravity="end"
+        android:layout_marginBottom="8dp">
 
-        <Button
-            android:text="WARM"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#333333"
+        <ImageButton
+            android:id="@+id/btnAddVideo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_add"
+            android:background="@android:color/transparent"
+            android:contentDescription="Add Video"
+            android:tint="#FFFFFF"
             android:layout_marginEnd="8dp" />
 
         <Button
-            android:text="COOL"
+            android:id="@+id/btnExport"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Export"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#333333"
-            android:layout_marginEnd="8dp" />
-
-        <Button
-            android:text="VINTAGE"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#333333"
-            android:layout_marginEnd="8dp" />
-
-        <Button
-            android:text="CINEMATIC"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#333333" />
+            android:backgroundTint="#4CAF50"
+            android:textSize="14sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/voiceFxStatus"
+    <!-- Video Preview -->
+    <FrameLayout
+        android:id="@+id/videoContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="VOICE FX: OFF"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:background="#333333"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#000000"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:layout_marginBottom="8dp">
 
-    <Button
-        android:id="@+id/btnSwapBackground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Swap Background"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#4CAF50"
-        android:layout_marginBottom="8dp" />
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true" />
+    </FrameLayout>
 
-    <Button
-        android:id="@+id/btnExport"
+    <!-- Horizontal Toolbar -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:overScrollMode="never" />
+
+    <!-- Frame Preview Timeline -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/framePreview"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:overScrollMode="never" />
+
+    <!-- Voice FX Toggle -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Export Reel"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#4CAF50" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voice FX"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginEnd="8dp" />
+
+        <Switch
+            android:id="@+id/voiceFxSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumbTint="#4CAF50"
+            android:trackTint="#A5D6A7" />
+    </LinearLayout>
+
 </LinearLayout>
