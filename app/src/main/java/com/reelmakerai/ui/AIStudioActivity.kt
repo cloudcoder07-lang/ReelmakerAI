@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -29,6 +30,9 @@ class AIStudioActivity : AppCompatActivity() {
     private lateinit var btnMaximize: ImageButton
     private lateinit var videoDuration: TextView
     private lateinit var videoUri: Uri
+
+    private val handler = Handler()
+    private lateinit var updateRunnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,17 +60,29 @@ class AIStudioActivity : AppCompatActivity() {
                 updateDuration(0, mp.duration)
             }
 
+            updateRunnable = object : Runnable {
+                override fun run() {
+                    if (videoView.isPlaying) {
+                        updateDuration(videoView.currentPosition, videoView.duration)
+                        handler.postDelayed(this, 1000)
+                    }
+                }
+            }
+
             btnPlayPause.setOnClickListener {
                 if (videoView.isPlaying) {
                     videoView.pause()
                     btnPlayPause.setImageResource(R.drawable.ic_play)
+                    handler.removeCallbacks(updateRunnable)
                     updateDuration(videoView.currentPosition, videoView.duration)
                 } else {
                     videoView.start()
                     btnPlayPause.setImageResource(R.drawable.ic_pause)
+                    handler.post(updateRunnable)
 
                     videoView.setOnCompletionListener {
                         btnPlayPause.setImageResource(R.drawable.ic_play)
+                        handler.removeCallbacks(updateRunnable)
                         updateDuration(videoView.duration, videoView.duration)
                     }
                 }
@@ -93,7 +109,7 @@ class AIStudioActivity : AppCompatActivity() {
                 val bitmap = retriever.getFrameAtTime(timeUs, MediaMetadataRetriever.OPTION_CLOSEST)
                 if (bitmap != null) {
                     val drawable = BitmapDrawable(resources, bitmap)
-                    frameList.add(FrameItem(drawable))
+                    frameList.add(FrameItem(drawable)) // ✅ Only one argument
                 }
             }
 
