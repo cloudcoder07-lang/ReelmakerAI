@@ -16,7 +16,6 @@ import com.reelmakerai.analytics.EngagementMonitor
 import com.reelmakerai.assets.AssetSyncManager
 import com.reelmakerai.assets.ManifestValidator
 import com.reelmakerai.branding.PackUpdateManager
-import com.reelmakerai.export.AIStudioActivity
 import com.reelmakerai.localization.LocalizationManager
 import com.reelmakerai.network.NetworkStatusMonitor
 import com.reelmakerai.preview.VoiceFxPreviewFragment

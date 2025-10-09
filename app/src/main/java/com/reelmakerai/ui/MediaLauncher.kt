@@ -3,7 +3,6 @@ package com.reelmakerai.ui
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import com.reelmakerai.export.AIStudioActivity
 
 object MediaLauncher {
     private const val VIDEO_PICK_REQUEST = 101

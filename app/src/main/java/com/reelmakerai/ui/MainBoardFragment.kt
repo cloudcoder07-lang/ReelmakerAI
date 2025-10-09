@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.reelmakerai.databinding.FragmentMainBoardBinding
-import com.reelmakerai.export.AIStudioActivity
 
 class MainBoardFragment : Fragment() {
 

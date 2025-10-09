@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:label="ReelMakerAI"
@@ -22,10 +25,11 @@
         </activity>
 
         <activity android:name=".ui.VideoPreviewActivity" android:exported="true" />
+        <activity android:name=".ui.FullscreenVideoActivity" />
         <activity android:name=".ui.PhotoEditorActivity" android:exported="true" />
         <activity android:name=".ui.CollageEditorActivity" android:exported="true" />
         <activity android:name=".ui.MainBoardActivity" android:exported="true" android:theme="@style/Theme.ReelMakerAI"/>
-        <activity android:name=".export.AIStudioActivity" />
+        <activity android:name=".ui.AIStudioActivity" />
         <activity android:name=".ui.ExportResultActivity" android:exported="true" >
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

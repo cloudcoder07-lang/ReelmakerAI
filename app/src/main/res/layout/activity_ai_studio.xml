@@ -1,108 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/aiStudioRoot"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/black"
-    android:padding="12dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Banner Ad Slot -->
-    <FrameLayout
-        android:id="@+id/bannerAdContainer"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:background="#222222" />
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:padding="8dp">
 
-    <!-- Add + Export Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginBottom="8dp">
-
-        <ImageButton
-            android:id="@+id/btnAddVideo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_add"
-            android:background="@android:color/transparent"
-            android:contentDescription="Add Video"
-            android:tint="#FFFFFF"
-            android:layout_marginEnd="8dp" />
-
+        <!-- Export Button -->
         <Button
             android:id="@+id/btnExport"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:text="Export"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#4CAF50"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:background="@android:color/transparent"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_margin="12dp" />
 
-    <!-- Video Preview -->
-    <FrameLayout
-        android:id="@+id/videoContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#000000"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:layout_marginBottom="8dp">
+        <!-- Ad Placeholder -->
+        <View
+            android:id="@+id/ad_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/btnExport"
+            android:layout_marginTop="4dp"
+            android:background="#333333" />
 
-        <VideoView
-            android:id="@+id/videoView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true" />
-    </FrameLayout>
+        <!-- Video Preview Container -->
+        <FrameLayout
+            android:id="@+id/videoContainer"
+            android:layout_width="240dp"
+            android:layout_height="426dp"
+            android:layout_below="@id/ad_placeholder"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-    <!-- Horizontal Toolbar -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        android:overScrollMode="never" />
+            <VideoView
+                android:id="@+id/videoPreview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
 
-    <!-- Frame Preview Timeline -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/framePreview"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        android:overScrollMode="never" />
-
-    <!-- Voice FX Toggle -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="4dp">
-
+        <!-- Duration Display -->
         <TextView
+            android:id="@+id/videoDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Voice FX"
+            android:text="00:00 / 00:00"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
-            android:layout_marginEnd="8dp" />
+            android:layout_below="@id/videoContainer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4dp" />
 
-        <Switch
-            android:id="@+id/voiceFxSwitch"
-            android:layout_width="wrap_content"
+        <!-- Video Control Row -->
+        <RelativeLayout
+            android:id="@+id/videoControlRow"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:thumbTint="#4CAF50"
-            android:trackTint="#A5D6A7" />
-    </LinearLayout>
+            android:layout_below="@id/videoDuration"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-</LinearLayout>
+            <ImageButton
+                android:id="@+id/btnPlayPause"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_play"
+                android:contentDescription="Play/Pause" />
+
+            <ImageButton
+                android:id="@+id/btnMaximize"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/ic_maximize"
+                android:contentDescription="Maximize Video" />
+        </RelativeLayout>
+
+        <!-- Frame Control Row -->
+        <LinearLayout
+            android:id="@+id/frameControlRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/videoControlRow"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp">
+
+            <ImageButton
+                android:id="@+id/btnAddVideo"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/ic_add"
+                android:contentDescription="Add Video"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/frameStrip"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal" />
+        </LinearLayout>
+
+        <!-- Main Toolbar -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mainToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_below="@id/frameControlRow"
+            android:layout_marginTop="4dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal" />
+
+        <!-- Sub Toolbar -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/subToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/mainToolBar"
+            android:visibility="gone"
+            android:layout_marginTop="4dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal" />
+
+    </RelativeLayout>
+</layout>

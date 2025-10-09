@@ -5,6 +5,10 @@
         android:allowBackup="true"
         android:label="ReelMakerAI"
         android:theme="@style/Theme.Material3.DayNight">
+
+        <!-- ✅ AdMob App ID declaration (only once, inside <application>) -->
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,5 +25,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
     </application>
 </manifest>

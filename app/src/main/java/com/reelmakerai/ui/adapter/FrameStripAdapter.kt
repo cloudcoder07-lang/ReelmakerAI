@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.reelmakerai.R
 import com.reelmakerai.model.FrameItem
 
-class FramePreviewAdapter(private val frames: List<FrameItem>) :
-    RecyclerView.Adapter<FramePreviewAdapter.FrameViewHolder>() {
+class FrameStripAdapter(private val frames: List<FrameItem>) :
+    RecyclerView.Adapter<FrameStripAdapter.FrameViewHolder>() {
 
     inner class FrameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.frameImage)
