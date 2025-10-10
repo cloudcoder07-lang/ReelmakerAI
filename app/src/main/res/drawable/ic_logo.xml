@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Stylized R shape -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,12h12c4.42,0 8,3.58 8,8s-3.58,8-8,8H12V12z"/>
+
+    <!-- Film strip perforations -->
+    <path
+        android:fillColor="#9C27B0"
+        android:pathData="M24,16h4v2h-4v-2zM24,20h4v2h-4v-2zM24,24h4v2h-4v-2z"/>
+
+    <!-- Optional glow or accent -->
+    <path
+        android:fillColor="#880E4F"
+        android:fillAlpha="0.3"
+        android:pathData="M12,12c0,0 10,-6 20,4s-10,20 -20,12z"/>
+</vector>

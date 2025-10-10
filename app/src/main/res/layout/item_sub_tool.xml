@@ -9,14 +9,21 @@
         android:id="@+id/subToolIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:tint="#FFFFFF" />
+        android:tint="#FFFFFF"
+        android:contentDescription="@string/tool_icon"
+        android:scaleType="centerInside" />
 
     <TextView
         android:id="@+id/subToolLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
+        android:text="@string/label_subtool"
+        android:textColor="@android:color/white"
         android:textSize="12sp"
         android:gravity="center"
-        android:layout_marginTop="4dp" />
+        android:layout_marginTop="4dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:visibility="visible" />
 </LinearLayout>

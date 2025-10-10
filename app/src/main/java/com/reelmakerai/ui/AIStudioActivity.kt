@@ -18,6 +18,7 @@ import com.reelmakerai.model.ToolType
 import com.reelmakerai.ui.adapter.FrameStripAdapter
 import com.reelmakerai.ui.adapter.MainToolAdapter
 import com.reelmakerai.ui.adapter.SubToolAdapter
+import com.reelmakerai.tools.ToolDispatcher
 
 class AIStudioActivity : AppCompatActivity() {
 
@@ -137,7 +138,7 @@ class AIStudioActivity : AppCompatActivity() {
 
         val subItems = tool.getSubTools()
         val subAdapter = SubToolAdapter(subItems) { item ->
-            item.action.invoke()
+            ToolDispatcher.dispatch(tool, item)
         }
         subToolBar.adapter = subAdapter
     }

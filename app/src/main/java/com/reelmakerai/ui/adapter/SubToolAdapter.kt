@@ -32,5 +32,5 @@ class SubToolAdapter(
         holder.itemView.setOnClickListener { onClick(item) }
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount(): Int = items.size
 }

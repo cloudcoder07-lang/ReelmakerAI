@@ -2,8 +2,16 @@ package com.reelmakerai.model
 
 import com.reelmakerai.R
 
-enum class ToolType {
-    CANVAS, AUDIO, STICKER, TEXT, EFFECT, FILTER, VOICE_FX, CUT, MERGE;
+enum class ToolType(val iconRes: Int) {
+    CANVAS(R.drawable.ic_canvas),
+    AUDIO(R.drawable.ic_audio),
+    STICKER(R.drawable.ic_sticker),
+    TEXT(R.drawable.ic_text),
+    EFFECT(R.drawable.ic_effect),
+    FILTER(R.drawable.ic_filter),
+    VOICE_FX(R.drawable.ic_voice_fx),
+    CUT(R.drawable.ic_cut),
+    MERGE(R.drawable.ic_merge);
 
     fun getSubTools(): List<SubToolItem> {
         return when (this) {

@@ -3,6 +3,8 @@
 
     <!-- App Name -->
     <string name="app_name">ReelMakerAI</string>
+    <string name="tool_icon">Tool icon</string>
+    <string name="label_subtool">Subtool</string>
 
     <!-- UI Labels -->
     <string name="btn_share">Share Reel</string>
