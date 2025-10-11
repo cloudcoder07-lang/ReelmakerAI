@@ -134,9 +134,9 @@ class AIStudioActivity : AppCompatActivity() {
     private fun enterEditingMode(tool: ToolType) {
         mainToolBar.visibility = View.GONE
         subToolBar.visibility = View.VISIBLE
-        videoContainer.animate().translationYBy(-72f).setDuration(300).start()
+        //videoContainer.animate().translationYBy(-72f).setDuration(300).start()
 
-        val subItems = tool.getSubTools()
+        val subItems = tool.getSubTools(this)  // ✅ Pass context here
         val subAdapter = SubToolAdapter(subItems) { item ->
             ToolDispatcher.dispatch(tool, item)
         }

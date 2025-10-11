@@ -120,7 +120,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mainToolBar"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="96dp"
             android:layout_below="@id/frameControlRow"
             android:layout_marginTop="4dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -130,7 +130,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/subToolBar"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="96dp"
             android:layout_below="@id/mainToolBar"
             android:visibility="gone"
             android:layout_marginTop="4dp"

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.reelmakerai.R
+import com.reelmakerai.model.ToolType
 import com.reelmakerai.model.SubToolItem
 
 class SubToolAdapter(
