@@ -15,10 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.reelmakerai.R
 import com.reelmakerai.model.FrameItem
 import com.reelmakerai.model.ToolType
+import com.reelmakerai.tools.ToolDispatcher
 import com.reelmakerai.ui.adapter.FrameStripAdapter
 import com.reelmakerai.ui.adapter.MainToolAdapter
 import com.reelmakerai.ui.adapter.SubToolAdapter
-import com.reelmakerai.tools.ToolDispatcher
+import com.reelmakerai.ui.editor.ResizeEditorActivity
+import com.reelmakerai.ui.editor.CropEditorActivity
+import com.reelmakerai.ui.editor.RotateEditorActivity
+import com.reelmakerai.ui.editor.FlipEditorActivity
+import com.reelmakerai.ui.editor.ZoomEditorActivity
+import com.reelmakerai.ui.editor.BGFillEditorActivity
 
 class AIStudioActivity : AppCompatActivity() {
 
@@ -34,6 +40,7 @@ class AIStudioActivity : AppCompatActivity() {
 
     private val handler = Handler()
     private lateinit var updateRunnable: Runnable
+    private val REQUEST_TOOL_EDIT = 999
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,7 +103,6 @@ class AIStudioActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            // ✅ Extract frames from video
             val retriever = MediaMetadataRetriever()
             retriever.setDataSource(this, videoUri)
 
@@ -110,7 +116,7 @@ class AIStudioActivity : AppCompatActivity() {
                 val bitmap = retriever.getFrameAtTime(timeUs, MediaMetadataRetriever.OPTION_CLOSEST)
                 if (bitmap != null) {
                     val drawable = BitmapDrawable(resources, bitmap)
-                    frameList.add(FrameItem(drawable)) // ✅ Only one argument
+                    frameList.add(FrameItem(drawable))
                 }
             }
 
@@ -134,11 +140,10 @@ class AIStudioActivity : AppCompatActivity() {
     private fun enterEditingMode(tool: ToolType) {
         mainToolBar.visibility = View.GONE
         subToolBar.visibility = View.VISIBLE
-        //videoContainer.animate().translationYBy(-72f).setDuration(300).start()
 
-        val subItems = tool.getSubTools(this)  // ✅ Pass context here
+        val subItems = tool.getSubTools(this)
         val subAdapter = SubToolAdapter(subItems) { item ->
-            ToolDispatcher.dispatch(tool, item)
+            ToolDispatcher.dispatch(this, tool, item)
         }
         subToolBar.adapter = subAdapter
     }
@@ -163,5 +168,29 @@ class AIStudioActivity : AppCompatActivity() {
         val seconds = (ms / 1000) % 60
         val minutes = (ms / 1000) / 60
         return String.format("%02d:%02d", minutes, seconds)
+    }
+
+    fun launchToolEditor(toolName: String) {
+        videoView.pause()
+        handler.removeCallbacks(updateRunnable)
+
+        val editorClass: Class<*>? = when (toolName) {
+            "Resize" -> ResizeEditorActivity::class.java
+            "Crop" -> CropEditorActivity::class.java
+            "Rotate" -> RotateEditorActivity::class.java
+            "Flip" -> FlipEditorActivity::class.java
+            "Zoom" -> ZoomEditorActivity::class.java
+            "BGFill" -> BGFillEditorActivity::class.java
+            else -> null
+        }
+
+        if (editorClass != null) {
+            val intent = Intent(this, editorClass)
+            intent.putExtra("tool_name", toolName)
+            intent.putExtra("video_uri", videoUri.toString())
+            startActivityForResult(intent, REQUEST_TOOL_EDIT)
+        } else {
+            Log.e("AIStudio", "Unknown tool editor: $toolName")
+        }
     }
 }

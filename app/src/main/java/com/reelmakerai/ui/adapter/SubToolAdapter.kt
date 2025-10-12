@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.reelmakerai.R
 import com.reelmakerai.model.ToolType
 import com.reelmakerai.model.SubToolItem
+import android.util.Log
 
 class SubToolAdapter(
     private val items: List<SubToolItem>,
@@ -30,7 +31,9 @@ class SubToolAdapter(
         val item = items[position]
         holder.icon.setImageResource(item.iconRes)
         holder.label.text = item.label
-        holder.itemView.setOnClickListener { onClick(item) }
+        holder.itemView.setOnClickListener {
+            Log.d("SubToolAdapter", "Tapped subtool: ${item.label}")
+            onClick(item) }
     }
 
     override fun getItemCount(): Int = items.size

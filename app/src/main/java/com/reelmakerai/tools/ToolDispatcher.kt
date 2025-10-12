@@ -2,17 +2,24 @@ package com.reelmakerai.tools
 
 import com.reelmakerai.model.ToolType
 import com.reelmakerai.model.SubToolItem
+import com.reelmakerai.ui.AIStudioActivity
+import android.content.Context
 
 object ToolDispatcher {
 
-    fun dispatch(toolType: ToolType, subTool: SubToolItem) {
+    fun dispatch(context: Context, toolType: ToolType, subTool: SubToolItem) {
         when (toolType) {
-            ToolType.CANVAS -> when (subTool.label) {
-                "Resize" -> CanvasTool.resize("16:9")
-                "Crop" -> CanvasTool.crop("Manual")
-                "Rotate" -> CanvasTool.rotate(90)
-                "Zoom/Pan" -> CanvasTool.zoomPan(1.0f, 0f, 0f)
-                "Background Fill" -> CanvasTool.backgroundFill("Color", "#000000")
+            ToolType.CANVAS -> {
+                if (context is AIStudioActivity) {
+                    when (subTool.label) {
+                        "Resize" -> context.launchToolEditor("Resize")
+                        "Crop" -> context.launchToolEditor("Crop")
+                        "Rotate" -> context.launchToolEditor("Rotate")
+                        "Flip" -> context.launchToolEditor("Flip")
+                        "Zoom" -> context.launchToolEditor("Zoom")
+                        "BGFill" -> context.launchToolEditor("BGFill")
+                    }
+                }
             }
 
             ToolType.AUDIO -> when (subTool.label) {

@@ -2,4 +2,10 @@
     <color name="bgGradient">#FF6F61</color> <!-- Coral gradient base -->
     <color name="btnPrimary">#FF4081</color> <!-- Pink button -->
     <color name="btnSecondary">#FF7043</color> <!-- Orange button -->
+    <!-- Cinematic UI palette -->
+    <color name="toolBackground">#121212</color>
+    <color name="toolTextPrimary">#FFFFFF</color>
+    <color name="toolTextSecondary">#CCCCCC</color>
+    <color name="toolAccent">#BB86FC</color>
+    <color name="toolDivider">#333333</color>
 </resources>

@@ -23,6 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.editor.ResizeEditorActivity" />
+        <activity android:name=".ui.editor.CropEditorActivity" />
+        <activity android:name=".ui.editor.RotateEditorActivity" />
+        <activity android:name=".ui.editor.FlipEditorActivity" />
+        <activity android:name=".ui.editor.ZoomEditorActivity" />
+        <activity android:name=".ui.editor.BGFillEditorActivity" />
+
 
         <activity android:name=".ui.VideoPreviewActivity" android:exported="true" />
         <activity android:name=".ui.FullscreenVideoActivity" />
