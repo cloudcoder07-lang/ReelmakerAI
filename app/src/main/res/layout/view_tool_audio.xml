@@ -1,18 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/audioToolContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:background="@color/toolBackground"
+    android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Audio Tools"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/toolTextPrimary"
         android:textSize="16sp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="12dp" />
 
-    <Button android:text="Trim" android:background="@null" android:textColor="#FFFFFF" />
-    <Button android:text="Fade In/Out" android:background="@null" android:textColor="#FFFFFF" />
-    <Button android:text="Volume" android:background="@null" android:textColor="#FFFFFF" />
+    <Button android:id="@+id/btnAudioTrim" android:text="Trim" style="@style/ToolButton" />
+    <Button android:id="@+id/btnAudioFade" android:text="Fade In/Out" style="@style/ToolButton" />
+    <Button android:id="@+id/btnAudioVolume" android:text="Volume" style="@style/ToolButton" />
+    <Button android:id="@+id/btnAudioVoiceover" android:text="Voiceover" style="@style/ToolButton" />
 </LinearLayout>

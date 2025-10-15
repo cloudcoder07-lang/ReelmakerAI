@@ -1,0 +1,27 @@
+<resources>
+    <style name="ToolTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/toolTextPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+
+    <style name="ToolButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/toolTextPrimary</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="AspectButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:minWidth">64dp</item>
+    </style>
+
+</resources>

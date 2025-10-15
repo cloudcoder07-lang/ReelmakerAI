@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/resizeRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- 🎬 Modular Video Preview Fragment Host -->
+    <FrameLayout
+        android:id="@+id/videoPreviewSlot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+
+    <!-- 🧠 Pinch Hint -->
+    <TextView
+        android:id="@+id/pinchHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pinch to zoom in"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="112dp" />
+
+    <!-- 📐 Aspect Ratio Buttons -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="72dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/aspectRatioBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal">
+
+            <Button android:id="@+id/btnFit" style="@style/AspectButton" android:text="Fit" />
+            <Button android:id="@+id/btn1_1" style="@style/AspectButton" android:text="1:1" />
+            <Button android:id="@+id/btn9_16" style="@style/AspectButton" android:text="9:16" />
+            <Button android:id="@+id/btn16_9" style="@style/AspectButton" android:text="16:9" />
+            <Button android:id="@+id/btn2_3" style="@style/AspectButton" android:text="2:3" />
+            <Button android:id="@+id/btn2_35_1" style="@style/AspectButton" android:text="2.35:1" />
+            <Button android:id="@+id/btn2_1" style="@style/AspectButton" android:text="2:1" />
+            <Button android:id="@+id/btn1_2" style="@style/AspectButton" android:text="1:2" />
+            <Button android:id="@+id/btn3_4" style="@style/AspectButton" android:text="3:4" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- ✅ Confirm Button -->
+    <ImageButton
+        android:id="@+id/btnConfirmResize"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/ic_check"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Confirm Resize" />
+</FrameLayout>

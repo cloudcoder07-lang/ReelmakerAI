@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnRotateLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rotate Left" />
+
+    <Button
+        android:id="@+id/btnRotateRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rotate Right"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginTop="24dp" />
+
+    <Button
+        android:id="@+id/btnDiscard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Discard"
+        android:layout_marginTop="12dp" />
+</LinearLayout>

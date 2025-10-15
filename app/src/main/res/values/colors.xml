@@ -12,4 +12,12 @@
     <color name="defaultPackColor">#9E9E9E</color> <!-- Grey -->
     <color name="black">#000000</color> <!-- Black -->
     <color name="white">#FFFFFF</color> <!-- White -->
-</resources>
+
+    <!-- Cinematic tool palette -->
+    <color name="toolBackground">#121212</color>
+    <color name="toolTextPrimary">#FFFFFF</color>
+    <color name="toolTextSecondary">#CCCCCC</color>
+    <color name="toolAccent">#BB86FC</color>
+    <color name="toolDivider">#333333</color>
+
+   </resources>

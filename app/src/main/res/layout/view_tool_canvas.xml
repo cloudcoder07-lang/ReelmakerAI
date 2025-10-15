@@ -1,0 +1,89 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/canvasToolScroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/toolBackground"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:id="@+id/canvasToolContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Canvas Tools"
+            android:textColor="@color/toolTextPrimary"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Manual Tools -->
+        <Button
+            android:id="@+id/btnCanvasCrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crop"
+            style="@style/ToolButton" />
+
+        <Button
+            android:id="@+id/btnCanvasRotate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotate"
+            style="@style/ToolButton" />
+
+        <Button
+            android:id="@+id/btnCanvasFlip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flip"
+            style="@style/ToolButton" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/toolDivider"
+            android:layout_marginVertical="12dp" />
+
+        <!-- AI Tools -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AI Tools"
+            android:textColor="@color/toolAccent"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnSmartCrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Smart Crop"
+            style="@style/ToolButton" />
+
+        <Button
+            android:id="@+id/btnBgReplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Replace Background"
+            style="@style/ToolButton" />
+
+        <Button
+            android:id="@+id/btnAiZoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AI Zoom"
+            style="@style/ToolButton" />
+
+        <Button
+            android:id="@+id/btnStyleTransfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Style Transfer"
+            style="@style/ToolButton" />
+
+    </LinearLayout>
+</ScrollView>

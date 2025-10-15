@@ -83,3 +83,16 @@ enum class ToolType(val iconRes: Int) {
         }
     }
 }
+
+// 🔧 Extension function to map ToolType to ToolProfile
+fun ToolType.toProfile(): ToolProfile = when (this) {
+    ToolType.CANVAS -> ToolProfile.CANVAS_ROTATE
+    ToolType.AUDIO -> ToolProfile.AUDIO_VOLUME
+    ToolType.STICKER -> ToolProfile.CANVAS_CROP
+    ToolType.TEXT -> ToolProfile.CANVAS_CROP
+    ToolType.EFFECT -> ToolProfile.EFFECT_FILTER
+    ToolType.FILTER -> ToolProfile.EFFECT_FILTER
+    ToolType.VOICE_FX -> ToolProfile.AUDIO_VOLUME
+    ToolType.CUT -> ToolProfile.CANVAS_CROP
+    ToolType.MERGE -> ToolProfile.CANVAS_ROTATE
+}

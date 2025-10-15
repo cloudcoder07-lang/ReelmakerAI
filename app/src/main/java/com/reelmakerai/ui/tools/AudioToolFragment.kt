@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.reelmakerai.R
 
 class AudioToolFragment : Fragment() {
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.view_tool_audio, container, false)
 

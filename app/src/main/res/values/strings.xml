@@ -38,14 +38,6 @@
     <string name="fx_chipmunk">Chipmunk</string>
     <string name="fx_deep">Deep</string>
 
-    <string name="tool_audio">Audio</string>
-    <string name="tool_sticker">Sticker</string>
-    <string name="tool_text">Text</string>
-    <string name="tool_effect">Effect</string>
-    <string name="tool_voicefx">VoiceFX</string>
-    <string name="tool_cut">Cut</string>
-
-
     <!-- Supported Languages -->
     <string-array name="supported_languages">
         <item>English</item>

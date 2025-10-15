@@ -2,47 +2,27 @@ package com.reelmakerai.ui.editor
 
 import android.net.Uri
 import android.os.Bundle
-import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.reelmakerai.R
+import com.reelmakerai.ui.tools.ResizeToolFragment
 
 class ResizeEditorActivity : AppCompatActivity() {
 
-    private lateinit var videoView: VideoView
-    private lateinit var toolControlContainer: LinearLayout
-    private lateinit var btnExport: ImageButton
-    private lateinit var btnClose: ImageButton
-    private lateinit var videoUri: Uri
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tool_editor)
+        setContentView(R.layout.activity_resize_editor)
 
-        videoView = findViewById(R.id.videoPreview)
-        toolControlContainer = findViewById(R.id.toolControlContainer)
-        btnExport = findViewById(R.id.btnExport)
-        btnClose = findViewById(R.id.btnClose)
+        val videoUri = intent.getStringExtra("video_uri")
+        if (videoUri != null) {
+            val fragment = ResizeToolFragment().apply {
+                arguments = Bundle().apply {
+                    putString("video_uri", videoUri)
+                }
+            }
 
-        videoUri = Uri.parse(intent.getStringExtra("video_uri"))
-        videoView.setVideoURI(videoUri)
-        videoView.setOnPreparedListener { mp ->
-            mp.isLooping = true
-            videoView.start()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.resizeToolContainer, fragment)
+                .commit()
         }
-
-        btnExport.setOnClickListener {
-            Toast.makeText(this, "Export Resize", Toast.LENGTH_SHORT).show()
-        }
-
-        btnClose.setOnClickListener {
-            finish()
-        }
-
-        injectResizeControls()
-    }
-
-    private fun injectResizeControls() {
-        val resizeControls = layoutInflater.inflate(R.layout.view_resize_controls, toolControlContainer, false)
-        toolControlContainer.addView(resizeControls)
     }
 }
