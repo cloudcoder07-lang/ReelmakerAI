@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.launcher.FileEditHistoryActivity" />
         <activity android:name=".ui.editor.ResizeEditorActivity" />
         <activity android:name=".ui.editor.CropEditorActivity" />
         <activity android:name=".ui.editor.RotateEditorActivity" />

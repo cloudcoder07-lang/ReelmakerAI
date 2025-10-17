@@ -3,4 +3,10 @@
     <external-files-path
         name="reels"
         path="Movies/Reels/" />
+    <external-files-path
+        name="exports"
+        path="ReelExports/" />
+    <external-files-path
+        name="downloads"
+        path="Downloads/" />
 </paths>

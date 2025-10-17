@@ -1,6 +1,7 @@
 package com.reelmakerai.model
 
 data class SubToolItem(
-    val label: String,
-    val iconRes: Int
+    val name: String,
+    val iconRes: Int,
+    val label: String
 )

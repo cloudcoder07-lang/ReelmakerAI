@@ -20,4 +20,11 @@
     <color name="toolAccent">#BB86FC</color>
     <color name="toolDivider">#333333</color>
 
-   </resources>
+
+    <color name="buttonBackground">#6A5ACD</color> <!-- Soft purple -->
+    <color name="buttonText">#FFFFFF</color>
+
+    <color name="purpleAccent">#6A5ACD</color>
+
+
+</resources>

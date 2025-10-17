@@ -1,6 +1,5 @@
 package com.reelmakerai.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,19 +9,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import com.reelmakerai.R
-import com.reelmakerai.analytics.AnalyticsTracker
-import com.reelmakerai.analytics.EventType
-import com.reelmakerai.analytics.EngagementMonitor
-import com.reelmakerai.assets.AssetSyncManager
-import com.reelmakerai.assets.ManifestValidator
+import com.reelmakerai.analytics.*
+import com.reelmakerai.assets.*
 import com.reelmakerai.branding.PackUpdateManager
 import com.reelmakerai.localization.LocalizationManager
 import com.reelmakerai.network.NetworkStatusMonitor
-import com.reelmakerai.preview.VoiceFxPreviewFragment
 import com.reelmakerai.referral.ReferralEngine
 import com.reelmakerai.release.*
 import com.reelmakerai.session.SessionManager
 import com.reelmakerai.share.ShareManager
+import com.reelmakerai.analytics.GrowthDashboard
+import com.reelmakerai.ui.launcher.FileEditHistoryActivity
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -30,10 +27,6 @@ class MainBoardActivity : AppCompatActivity() {
 
     private lateinit var engagementMonitor: EngagementMonitor
     private lateinit var idleRefresh: IdleRefreshTrigger
-
-    companion object {
-        private const val VIDEO_PICK_REQUEST = 101
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,10 +50,10 @@ class MainBoardActivity : AppCompatActivity() {
         }
         engagementMonitor.start()
 
-        // Modular click routing
+        // ✅ Updated routing for "Create New Video"
         findViewById<CardView>(R.id.btnVideo)?.setOnClickListener {
             AnalyticsTracker.logEvent(EventType.BUTTON_TAPPED, "Video")
-            launchSystemVideoPicker()
+            launchFileEditHistory()
         }
 
         findViewById<CardView>(R.id.btnPhoto)?.setOnClickListener {
@@ -119,29 +112,10 @@ class MainBoardActivity : AppCompatActivity() {
         LaunchReady.isReady = ready
     }
 
-    private fun launchSystemVideoPicker() {
-        val intent = Intent(Intent.ACTION_PICK).apply {
-            type = "video/*"
-        }
-        startActivityForResult(intent, VIDEO_PICK_REQUEST)
+    private fun launchFileEditHistory() {
+        val intent = Intent(this, FileEditHistoryActivity::class.java)
+        startActivity(intent)
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == VIDEO_PICK_REQUEST && resultCode == RESULT_OK) {
-            val selectedVideoUri = data?.data
-            selectedVideoUri?.let {
-                val intent = Intent(this, AIStudioActivity::class.java).apply {
-                    putExtra("video_uri", it.toString())
-                }
-                startActivity(intent)
-            }
-        } else {
-            MediaLauncher.handleActivityResult(this, requestCode, resultCode, data)
-        }
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         SessionManager.endSession()

@@ -38,6 +38,72 @@
     <string name="fx_chipmunk">Chipmunk</string>
     <string name="fx_deep">Deep</string>
 
+    <string name="canvas_resize">Resize</string>
+    <string name="canvas_crop">Crop</string>
+    <string name="canvas_rotate">Rotate</string>
+    <string name="canvas_flip">Flip</string>
+    <string name="canvas_zoom">Zoom</string>
+    <string name="canvas_bg_fill">Background Fill</string>
+
+    <!-- AUDIO -->
+    <string name="audio_add_music">Add Music</string>
+    <string name="audio_voiceover">Voiceover</string>
+    <string name="audio_sound_effects">Sound Effects</string>
+    <string name="audio_volume_control">Volume Control</string>
+    <string name="audio_sync_to_beat">Sync to Beat</string>
+
+    <!-- STICKER -->
+    <string name="sticker_emoji_pack">Emoji Pack</string>
+    <string name="sticker_animated_stickers">Animated Stickers</string>
+    <string name="sticker_branded_overlays">Branded Overlays</string>
+    <string name="sticker_custom_upload">Custom Upload</string>
+    <string name="sticker_position_scale">Position &amp; Scale</string>
+
+    <!-- TEXT -->
+    <string name="text_add_text">Add Text</string>
+    <string name="text_font_picker">Font Picker</string>
+    <string name="text_color_gradient">Color &amp; Gradient</string>
+    <string name="text_animation">Animation</string>
+    <string name="text_timing">Timing</string>
+
+    <!-- EFFECT -->
+    <string name="effect_glitch">Glitch</string>
+    <string name="effect_blur">Blur</string>
+    <string name="effect_shake">Shake</string>
+    <string name="effect_vhs">VHS</string>
+    <string name="effect_sparkle">Sparkle</string>
+    <string name="effect_custom_fx">Custom FX</string>
+
+    <!-- FILTER -->
+    <string name="filter_mood_presets">Mood Presets</string>
+    <string name="filter_luts">LUTs</string>
+    <string name="filter_intensity">Intensity Slider</string>
+    <string name="filter_preview_grid">Preview Grid</string>
+
+    <!-- VOICE FX -->
+    <string name="voice_fx_robot">Robot</string>
+    <string name="voice_fx_chipmunk">Chipmunk</string>
+    <string name="voice_fx_deep_voice">Deep Voice</string>
+    <string name="voice_fx_echo">Echo</string>
+    <string name="voice_fx_reverb">Reverb</string>
+    <string name="voice_fx_pitch">Custom Pitch</string>
+
+    <!-- CUT -->
+    <string name="cut_trim">Trim Start/End</string>
+    <string name="cut_split">Split at Playhead</string>
+    <string name="cut_multicut">Multi-Segment Cut</string>
+    <string name="cut_ripple">Ripple Delete</string>
+    <string name="cut_preview">Preview Before Cut</string>
+
+    <!-- MERGE -->
+    <string name="merge_add_video">Add Video</string>
+    <string name="merge_add_photo">Add Photo</string>
+    <string name="merge_insert">Insert at Playhead</string>
+    <string name="merge_append">Append to End</string>
+    <string name="merge_transitions">Transition Options</string>
+
+
+
     <!-- Supported Languages -->
     <string-array name="supported_languages">
         <item>English</item>
