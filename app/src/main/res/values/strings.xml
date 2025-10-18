@@ -102,6 +102,9 @@
     <string name="merge_append">Append to End</string>
     <string name="merge_transitions">Transition Options</string>
 
+    <string name="play_video">Play video</string>
+    <string name="confirm_crop">Confirm crop</string>
+
 
 
     <!-- Supported Languages -->
